@@ -17,9 +17,47 @@ class NWManager {
     
     private let baseURL = "https://frontend-test-assignment-api.abz.agency/api/v1"
     
-    private var authToken: String = ""
+    private let tokenKey = "authToken"
+    var authToken: String? {
+        get {
+            
+            if let expirationDate = expirationDate, Date() < expirationDate, let token = KeychainHelper.getToken(for: tokenKey) {
+                            // Token is still valid, fetch it from the keychain
+                return token
+                        } else {
+                            // Token is expired or no expiration date, fetch a new one
+                            fetchToken { result in
+                                switch result {
+                                case .success(let newToken):
+                                    self.authToken = newToken
+                                case .failure(let error):
+                                    print("Failed to fetch new token: \(error)")
+                                }
+                            }
+                            return nil
+                        }
+        }
+        
+        set {
+            guard let newToken = newValue else { return }
+                       // Store the new token securely in the keychain
+                       KeychainHelper.save(token: newToken, for: tokenKey)
+                       // Update the expiration date
+                        expirationDate = Date().addingTimeInterval(40 * 60)
+        }
+    }
+    private var expirationDate: Date?
     
-    private init() {}
+    private init() {
+        fetchToken { result in
+            switch result {
+            case .success(let newToken):
+                self.authToken = newToken
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
     
     // MARK: - Public Methods
     
@@ -133,7 +171,7 @@ class NWManager {
     }
     
     func fetchToken(completion: @escaping (Result<String, Error>) -> Void) {
-        let url = baseURL + "/positions"
+        let url = baseURL + "/token"
         
         AF.request(url, method: .get).response { response in
             //general check if Alamofire succeded and we got any response
@@ -152,9 +190,11 @@ class NWManager {
                     if sussess {
                         let tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: data)
                         completion(.success(tokenResponse.token))
+                        
                     } else {
                         let errorResponce = try JSONDecoder().decode(ErrorResponse.self, from: data)
                         completion(.failure(NWManagerError.errorResponce(errorResponce)))
+                        
                     }
                 }
                 catch {
@@ -178,7 +218,7 @@ class NWManager {
         let url = baseURL + "/users"
         
         let headers: HTTPHeaders = [
-            "token": authToken,
+            "token": authToken ?? "",
         ]
         
         let parameters: [String: Any] = [

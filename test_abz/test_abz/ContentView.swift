@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    let a = NWManager.shared.fetchUsers(completion: {_ in })
+    
+    let a = NWManager.shared.fetchToken(completion: { _ in })
+    
     
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("hi")
         }
         .padding()
     }
