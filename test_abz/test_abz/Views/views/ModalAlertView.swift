@@ -10,10 +10,10 @@ import SwiftUI
 
 struct ModalAlertView: View {
     
-    @State var message: Message
+    @State var type: AllertType
     @Binding var isPresented: Bool
     
-    enum Message {
+    enum AllertType {
         case noConnection
         case signUpSuccess
         case signUpFail
@@ -25,13 +25,13 @@ struct ModalAlertView: View {
     
     var completion: ()->Void
     
-    init(message: Message, supportingText: String?, isPresented: Binding<Bool>, complition: @escaping ()->Void) {
+    init(type: AllertType, supportingText: String?, isPresented: Binding<Bool>, complition: @escaping ()->Void) {
         self.message = message
         
         if let supportingText = supportingText {
             self.supportingText = supportingText
         } else {
-            switch message {
+            switch type {
             case .noConnection:
                 self.supportingText = "There is no internet Connection"
                 self.imageName = "no-connection-image"
