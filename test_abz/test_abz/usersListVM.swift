@@ -7,6 +7,9 @@ class usersListVM: ObservableObject {
     private let itemsPerPage: Int = 6
     private let cacheManager = CacheImageManager()
 
+    @Binding var isPresented: Bool
+    @Binding var allertType: AllertType
+
     func fetchNextPage() {
         NWManager.shared.fetchUsers(page: currentPage, itemsPerPage: itemsPerPage) { [weak self] result in
             guard let self = self else { return }
@@ -17,7 +20,8 @@ class usersListVM: ObservableObject {
                 self.currentPage += 1
                 
             case .failure(let error):
-                print("Error fetching users: \(error)")
+                allertType = .noConnection
+                isPresented = true
             }
         }
     }
