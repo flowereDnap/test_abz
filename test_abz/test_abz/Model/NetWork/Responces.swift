@@ -18,7 +18,7 @@ struct TokenResponse: Decodable {
 
 struct PositionsResponse: Decodable {
     let success: Bool
-    let positions: [Position]
+    let positions: [Int:String]
 }
 
 struct UsersResponse: Decodable {

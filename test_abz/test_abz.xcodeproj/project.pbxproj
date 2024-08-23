@@ -7,21 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		046264D92C743A0C0057CEED /* UIConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264D82C743A0C0057CEED /* UIConstraints.swift */; };
+		046264DC2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */; };
+		046264DE2C7443380057CEED /* NunitoSans_7pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */; };
+		046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264E02C74486B0057CEED /* PrimaryButton.swift */; };
+		046264E32C74487B0057CEED /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264E22C74487B0057CEED /* SecondaryButton.swift */; };
+		046264E52C7450E30057CEED /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264E42C7450E30057CEED /* TextField.swift */; };
 		0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4D92C73E46000790B5C /* test_abzApp.swift */; };
 		0474F4DC2C73E46000790B5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4DB2C73E46000790B5C /* ContentView.swift */; };
 		0474F4DE2C73E46300790B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0474F4DD2C73E46300790B5C /* Assets.xcassets */; };
 		0474F4E12C73E46300790B5C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0474F4E02C73E46300790B5C /* Preview Assets.xcassets */; };
 		0474F4E92C73E4CA00790B5C /* NWManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4E82C73E4CA00790B5C /* NWManager.swift */; };
 		0474F4EB2C73E73800790B5C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4EA2C73E73800790B5C /* User.swift */; };
-		0474F4ED2C73E96400790B5C /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4EC2C73E96400790B5C /* Position.swift */; };
 		0474F4F02C73F18700790B5C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4EF2C73F18700790B5C /* Errors.swift */; };
 		0474F4F32C73F1B500790B5C /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4F22C73F1B500790B5C /* CacheManager.swift */; };
 		0474F4F52C73F3EE00790B5C /* Responces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4F42C73F3EE00790B5C /* Responces.swift */; };
 		0474F4F82C73F9C700790B5C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4F72C73F9C700790B5C /* KeychainHelper.swift */; };
+		04A0D2152C76042200F01C63 /* usersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D2142C76042200F01C63 /* usersListView.swift */; };
+		04A0D2172C76043200F01C63 /* signUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D2162C76043200F01C63 /* signUpView.swift */; };
+		04A0D21A2C76075F00F01C63 /* ModalAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D2192C76075F00F01C63 /* ModalAlertView.swift */; };
+		04A0D21C2C77344D00F01C63 /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D21B2C77344D00F01C63 /* UserCellView.swift */; };
+		04A0D21E2C788F7000F01C63 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */; };
 		AB0D1F062ABE555E0C72CF6A /* Pods_test_abz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB31D7C6429289B4BE847D2C /* Pods_test_abz.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		046264D82C743A0C0057CEED /* UIConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstraints.swift; sourceTree = "<group>"; };
+		046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans_7pt-SemiBold.ttf"; sourceTree = "<group>"; };
+		046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans_7pt-Regular.ttf"; sourceTree = "<group>"; };
+		046264DF2C7445530057CEED /* test-abz-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "test-abz-Info.plist"; sourceTree = SOURCE_ROOT; };
+		046264E02C74486B0057CEED /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		046264E22C74487B0057CEED /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		046264E42C7450E30057CEED /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		0474F4D62C73E46000790B5C /* test_abz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_abz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0474F4D92C73E46000790B5C /* test_abzApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_abzApp.swift; sourceTree = "<group>"; };
 		0474F4DB2C73E46000790B5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,11 +46,15 @@
 		0474F4E02C73E46300790B5C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0474F4E82C73E4CA00790B5C /* NWManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NWManager.swift; sourceTree = "<group>"; };
 		0474F4EA2C73E73800790B5C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		0474F4EC2C73E96400790B5C /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		0474F4EF2C73F18700790B5C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0474F4F22C73F1B500790B5C /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		0474F4F42C73F3EE00790B5C /* Responces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responces.swift; sourceTree = "<group>"; };
 		0474F4F72C73F9C700790B5C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		04A0D2142C76042200F01C63 /* usersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usersListView.swift; sourceTree = "<group>"; };
+		04A0D2162C76043200F01C63 /* signUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpView.swift; sourceTree = "<group>"; };
+		04A0D2192C76075F00F01C63 /* ModalAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAlertView.swift; sourceTree = "<group>"; };
+		04A0D21B2C77344D00F01C63 /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
+		04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		6947678F0445863CE6C6EF96 /* Pods-test_abz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_abz.release.xcconfig"; path = "Target Support Files/Pods-test_abz/Pods-test_abz.release.xcconfig"; sourceTree = "<group>"; };
 		AB31D7C6429289B4BE847D2C /* Pods_test_abz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_abz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D241473EEA19891DA59BD439 /* Pods-test_abz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_abz.debug.xcconfig"; path = "Target Support Files/Pods-test_abz/Pods-test_abz.debug.xcconfig"; sourceTree = "<group>"; };
@@ -51,6 +72,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		046264D72C7438F70057CEED /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0474F4D92C73E46000790B5C /* test_abzApp.swift */,
+				04A0D2182C76045400F01C63 /* styling */,
+				04A0D2132C7603FE00F01C63 /* views */,
+				04A0D2122C7603ED00F01C63 /* basicElements */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		046264DA2C7440740057CEED /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */,
+				046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		0474F4CD2C73E45F00790B5C = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +113,9 @@
 		0474F4D82C73E46000790B5C /* test_abz */ = {
 			isa = PBXGroup;
 			children = (
+				046264DF2C7445530057CEED /* test-abz-Info.plist */,
+				046264D72C7438F70057CEED /* Views */,
 				0474F4E72C73E4A400790B5C /* Model */,
-				0474F4D92C73E46000790B5C /* test_abzApp.swift */,
-				0474F4DB2C73E46000790B5C /* ContentView.swift */,
 				0474F4DD2C73E46300790B5C /* Assets.xcassets */,
 				0474F4DF2C73E46300790B5C /* Preview Content */,
 			);
@@ -113,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				0474F4EA2C73E73800790B5C /* User.swift */,
-				0474F4EC2C73E96400790B5C /* Position.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -125,6 +165,38 @@
 				0474F4F72C73F9C700790B5C /* KeychainHelper.swift */,
 			);
 			path = localMemory;
+			sourceTree = "<group>";
+		};
+		04A0D2122C7603ED00F01C63 /* basicElements */ = {
+			isa = PBXGroup;
+			children = (
+				046264E02C74486B0057CEED /* PrimaryButton.swift */,
+				046264E22C74487B0057CEED /* SecondaryButton.swift */,
+				046264E42C7450E30057CEED /* TextField.swift */,
+				04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */,
+			);
+			path = basicElements;
+			sourceTree = "<group>";
+		};
+		04A0D2132C7603FE00F01C63 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				04A0D2142C76042200F01C63 /* usersListView.swift */,
+				04A0D2162C76043200F01C63 /* signUpView.swift */,
+				0474F4DB2C73E46000790B5C /* ContentView.swift */,
+				04A0D2192C76075F00F01C63 /* ModalAlertView.swift */,
+				04A0D21B2C77344D00F01C63 /* UserCellView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		04A0D2182C76045400F01C63 /* styling */ = {
+			isa = PBXGroup;
+			children = (
+				046264DA2C7440740057CEED /* fonts */,
+				046264D82C743A0C0057CEED /* UIConstraints.swift */,
+			);
+			path = styling;
 			sourceTree = "<group>";
 		};
 		B1E7499A56D0C33A77A6BD63 /* Frameworks */ = {
@@ -205,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0474F4E12C73E46300790B5C /* Preview Assets.xcassets in Resources */,
+				046264DE2C7443380057CEED /* NunitoSans_7pt-Regular.ttf in Resources */,
+				046264DC2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf in Resources */,
 				0474F4DE2C73E46300790B5C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,14 +332,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046264E32C74487B0057CEED /* SecondaryButton.swift in Sources */,
 				0474F4DC2C73E46000790B5C /* ContentView.swift in Sources */,
+				04A0D21E2C788F7000F01C63 /* RadioButtonGroup.swift in Sources */,
+				046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */,
 				0474F4EB2C73E73800790B5C /* User.swift in Sources */,
 				0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */,
-				0474F4ED2C73E96400790B5C /* Position.swift in Sources */,
+				046264E52C7450E30057CEED /* TextField.swift in Sources */,
+				04A0D21A2C76075F00F01C63 /* ModalAlertView.swift in Sources */,
 				0474F4F82C73F9C700790B5C /* KeychainHelper.swift in Sources */,
 				0474F4F52C73F3EE00790B5C /* Responces.swift in Sources */,
 				0474F4F02C73F18700790B5C /* Errors.swift in Sources */,
 				0474F4E92C73E4CA00790B5C /* NWManager.swift in Sources */,
+				04A0D21C2C77344D00F01C63 /* UserCellView.swift in Sources */,
+				04A0D2172C76043200F01C63 /* signUpView.swift in Sources */,
+				04A0D2152C76042200F01C63 /* usersListView.swift in Sources */,
+				046264D92C743A0C0057CEED /* UIConstraints.swift in Sources */,
 				0474F4F32C73F1B500790B5C /* CacheManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +485,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"test_abz/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "test-abz-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +515,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"test_abz/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "test-abz-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
