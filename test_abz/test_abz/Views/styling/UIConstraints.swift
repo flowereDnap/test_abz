@@ -9,11 +9,17 @@ import Foundation
 
 import SwiftUI
 
+extension Color {
+    init(R: Double, G: Double, B: Double, a: Double) {
+        self.init(.sRGB, red: R / 255.0, green: G / 255.0, blue: B / 255.0, opacity: a)
+    }
+}
+
 // Define the DesignSystem class or struct
 struct UIConstraints {
     // MARK: - Colors
     
-    public static let primary = Color(red: 0.95686274766922, green: 0.8784313797950745, blue: 0.2549019753932953, opacity: 1)
+    public static let primary = Color(R: 244, G: 224, B: 65, a: 1)
     public static let primaryDark = Color(red: 1, green: 0.7799999713897705, blue: 0, opacity: 1)
     public static let secondary = Color(red: 0, green: 0.7411764860153198, blue: 0.8274509906768799, opacity: 1)
     public static let secondaryDark = Color(red: 0, green: 0.6083036661148071, blue: 0.7418337464332581, opacity: 1)

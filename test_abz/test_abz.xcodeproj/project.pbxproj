@@ -27,6 +27,7 @@
 		04A0D2172C76043200F01C63 /* signUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D2162C76043200F01C63 /* signUpView.swift */; };
 		04A0D21A2C76075F00F01C63 /* ModalAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D2192C76075F00F01C63 /* ModalAlertView.swift */; };
 		04A0D21C2C77344D00F01C63 /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D21B2C77344D00F01C63 /* UserCellView.swift */; };
+		04A0D21E2C788F7000F01C63 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */; };
 		AB0D1F062ABE555E0C72CF6A /* Pods_test_abz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB31D7C6429289B4BE847D2C /* Pods_test_abz.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		04A0D2162C76043200F01C63 /* signUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpView.swift; sourceTree = "<group>"; };
 		04A0D2192C76075F00F01C63 /* ModalAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAlertView.swift; sourceTree = "<group>"; };
 		04A0D21B2C77344D00F01C63 /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
+		04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		6947678F0445863CE6C6EF96 /* Pods-test_abz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_abz.release.xcconfig"; path = "Target Support Files/Pods-test_abz/Pods-test_abz.release.xcconfig"; sourceTree = "<group>"; };
 		AB31D7C6429289B4BE847D2C /* Pods_test_abz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_abz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D241473EEA19891DA59BD439 /* Pods-test_abz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_abz.debug.xcconfig"; path = "Target Support Files/Pods-test_abz/Pods-test_abz.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				046264E02C74486B0057CEED /* PrimaryButton.swift */,
 				046264E22C74487B0057CEED /* SecondaryButton.swift */,
 				046264E42C7450E30057CEED /* TextField.swift */,
+				04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */,
 			);
 			path = basicElements;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			files = (
 				046264E32C74487B0057CEED /* SecondaryButton.swift in Sources */,
 				0474F4DC2C73E46000790B5C /* ContentView.swift in Sources */,
+				04A0D21E2C788F7000F01C63 /* RadioButtonGroup.swift in Sources */,
 				046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */,
 				0474F4EB2C73E73800790B5C /* User.swift in Sources */,
 				0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 
 //stores basic entity operated in the project
-struct User: Decodable {
+struct User: Decodable, Identifiable {
     let id: Int
     let registrationTimestamp: Int
     

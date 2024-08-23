@@ -8,14 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct TextInputField: View {
+struct CustomTextField: View {
     
-    var title: String
     var subText: String = " "
-    let validate: (String)-> (Bool, String)
+    let validate: (String) -> (Bool, String)
     var placeholder: String
     
-    @State var errorMessage: String = ""
+    @State var errorMessage: String = " "
     
     @Binding var text: String
     
@@ -57,7 +56,7 @@ struct TextInputField: View {
                         error = !result.0
                         errorMessage = result.1
                     }
-                    print(validate(text))
+
                 })
                 .font(UIConstraints.fontRegular(size: 16))
                 .offset(x: 0, y: (!isEditing && !isFilled) ? 0 : 6)
@@ -91,8 +90,7 @@ struct InputTextField_Previews: PreviewProvider {
         @State private var valid: Bool = true
 
         var body: some View {
-            TextInputField(
-                title: "",
+            CustomTextField(
                 subText: "promt",
                 validate: { return ($0 == "aboba", "invalid")},
                 placeholder:  "placeholder",
