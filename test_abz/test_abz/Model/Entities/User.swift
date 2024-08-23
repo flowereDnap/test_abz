@@ -41,4 +41,17 @@ struct User: Decodable {
         self.position = try container.decode(String.self, forKey: .position)
         self.photo = try container.decode(String.self, forKey: .photo)
     }
+    
+    init(id: Int, registrationTimestamp: Int, name: String, email: String, phone: String, positionId: Int, position: String, photo: String) {
+        self.id = id
+        self.registrationTimestamp = registrationTimestamp
+        self.name = name
+        self.email = email
+        self.phone = phone
+        self.positionId = positionId
+        self.position = position
+        self.photo = photo
+    }
+
 }
+

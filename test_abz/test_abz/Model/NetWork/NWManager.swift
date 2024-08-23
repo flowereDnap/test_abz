@@ -135,7 +135,7 @@ class NWManager {
         }
     }
     
-    func fetchPositions(completion: @escaping (Result<[Position], Error>) -> Void) {
+    func fetchPositions(completion: @escaping (Result<[Int:String], Error>) -> Void) {
         let url = baseURL + "/positions"
         
         AF.request(url, method: .get).response { response in
