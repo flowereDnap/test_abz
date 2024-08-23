@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isFullScreenPresented = false
+    @State private var allertTypeInvoked: AllertType = .noConnection
     
     @State private var selectedTab: Tab = .users
     
@@ -42,7 +43,7 @@ struct ContentView: View {
                             .tag(Tab.signup)
                     }
                     .fullScreenCover(isPresented: $isFullScreenPresented) {
-                        ModalAlertView(message: .noConnection, supportingText: nil, isPresented: $isFullScreenPresented) {
+                        ModalAlertView(type: allertTypeInvoked, supportingText: nil, isPresented: $isFullScreenPresented) {
                             
                         }
                     }
