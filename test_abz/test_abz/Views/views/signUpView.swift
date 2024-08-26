@@ -11,11 +11,12 @@ import SwiftUI
 struct SignupView: View {
     //TODO VM
     @ObservedObject var viewModel: SignUpVM
-    
+
     @State private var selectedPos = ""
     var positions: [String] = ["yes", "no", "aboba"]
     
     var body: some View {
+
         ScrollView(showsIndicators: false){
             VStack( spacing: 24){
                 VStack(spacing: 32) {
@@ -60,17 +61,32 @@ struct SignupView: View {
                     }
                     
                 }
+
                 //TODO picker
-                Button {
-                    
-                } label: {
-                    Text("Sign Up")
-                }.buttonStyle(PrimaryButtonStyle())
+            Button("Select Photo") {
+                isPickerPresented = true
+            }
+            .photosPicker(isPresented: $isPickerPresented, selection: $selectedItem, matching: .images)
+            .buttonStyle(PrimaryButtonStyle())
                 
                 Spacer()
             }
             .padding(.vertical, 32)
             .padding(.horizontal, 16)
+.onChange(of: selectedItem) { newItem in
+            Task {
+                if let data = try? await newItem?.loadTransferable(type: Data.self),
+                   let uiImage = UIImage(data: data) {
+                    if validateImage(uiImage, dataSize: data.count) {
+                        selectedImage = uiImage
+                        imageValid
+                    } else {
+                        selectedImage = nil
+                        imageValid = false
+                    }
+                }
+            }
+        }
         }
     }
 }
