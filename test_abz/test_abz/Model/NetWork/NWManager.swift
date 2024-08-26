@@ -270,5 +270,21 @@ class NWManager {
             
         }
     }
+    
+    
+    func fetchImage(from url: String, completion: @escaping (Result<UIImage, NWManagerError>) -> Void) {
+           AF.request(url).validate().responseData { response in
+               switch response.result {
+               case .success(let data):
+                   if let image = UIImage(data: data) {
+                       completion(.success(image))
+                   } else {
+                       completion(.failure(.customError("Failed to decode image")))
+                   }
+               case .failure:
+                   completion(.failure(.customError("Failed to fetch image")))
+               }
+           }
+       }
 }
 

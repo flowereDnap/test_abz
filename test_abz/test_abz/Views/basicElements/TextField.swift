@@ -11,7 +11,15 @@ import SwiftUI
 struct CustomTextField: View {
     
     var subText: String = " "
-    let validate: (String) -> (Bool, String)
+    @Binding var validationREsult: (Bool, String) {
+        //upd view state on results from VM
+        didSet {
+            //update state onli once finished editing
+            if !isEditing{
+                //self.error =  .0
+            }
+        }
+    }
     var placeholder: String
     
     @State var errorMessage: String = " "
@@ -47,16 +55,6 @@ struct CustomTextField: View {
                         self.isEditing = isEditing
                         self.isFilled = !text.isEmpty
                     }
-                    
-                    
-                    
-                    if !isEditing {
-                        
-                        let result = validate(text)
-                        error = !result.0
-                        errorMessage = result.1
-                    }
-
                 })
                 .font(UIConstraints.fontRegular(size: 16))
                 .offset(x: 0, y: (!isEditing && !isFilled) ? 0 : 6)
@@ -87,12 +85,12 @@ struct CustomTextField: View {
 struct InputTextField_Previews: PreviewProvider {
     struct Wrapper: View {
         @State private var text: String = ""
-        @State private var valid: Bool = true
+        @State private var validationResult: (Bool,String) = (true, " ")
 
         var body: some View {
             CustomTextField(
                 subText: "promt",
-                validate: { return ($0 == "aboba", "invalid")},
+                validationREsult: $validationResult,
                 placeholder:  "placeholder",
                 text: $text
             )

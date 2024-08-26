@@ -10,21 +10,42 @@ import SwiftUI
 
 
 struct UsersView: View {
-    //@ObservedObject
-    var list: [User] 
+    
+    @ObservedObject var viewModel: UsersListVM
+    
     
     var body: some View {
-        VStack(spacing: 0) {
-            if list.count == 0 {
+        
+        VStack(spacing: 24) {
+            if viewModel.users.count == 0 {
                 Image("no-users-image")
                     .resizable()
                     .frame(width: 200, height: 200)
                 Text("There are no users yet")
                     .font(UIConstraints.fontRegular(size: 20))
+                Button {
+                    viewModel.fetchNextPage()
+                    print("pressed")
+                } label: {
+                    Text("Reload")
+                        .font(UIConstraints.fontRegular(size: 20))
+                }.buttonStyle(PrimaryButtonStyle())
+                
             } else {
-                List(list) { user in
-                            UserCellView(user: user)
+
+                            
+                
+                List(viewModel.users) { user in
+                    
+                    @State var image: UIImage = UIImage(named: "photo-cover")!
+                    
+                    UserCellView(user: user, image: image)
+                        .onAppear{
+                            print("loading")
+                            viewModel.fetchUserImage(for: user, bindingImage: $image)
+                                }
                         }
+                
                 .listStyle(PlainListStyle())
                 .listRowInsets(EdgeInsets())
             }
@@ -32,14 +53,20 @@ struct UsersView: View {
     }
 }
 
-#Preview {
-    UsersView(list: [User(id: 0,
-                          registrationTimestamp: 0,
-                          name:    "Seraphina Anastasia Isolde Aurelia Celestina von Hohenzollern",
-                          email:
-                          "maximus_wilderman_ronaldo_schuppe@gmail.com",
-                          phone: "+38 (098) 278 76 24",
-                          positionId: 1,
-                          position: "Backend developer",
-                          photo: "")])
+
+
+
+struct UsersView_Previews: PreviewProvider {
+    struct Wrapper: View {
+        @State private var isPresented: Bool = false
+        @State private var allertType: AlertType = .noConnection
+
+        var body: some View {
+            UsersView(viewModel: UsersListVM(isPresented: $isPresented, alertType: $allertType))
+        }
+    }
+
+    static var previews: some View {
+        Wrapper()
+    }
 }
