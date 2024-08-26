@@ -10,64 +10,56 @@ import SwiftUI
 
 struct SignupView: View {
     //TODO VM
-    @State var text1: String = ""
-    @State var text2: String = ""
-    @State var text3: String = ""
-    var nameFieldValidation: (String) -> (Bool, String) = { return (!$0.isEmpty , "Required field")}
-    
-    var emailFieldValidation: (String) -> (Bool, String) = { if $0.isEmpty {
-        return (!$0.isEmpty , "Required field")
-    } else {
-        return (!$0.isEmpty , "Required field")
-    }
-    }
-    
-    var phoneFieldValidation: (String) -> (Bool, String) = { if $0.isEmpty {
-        return (!$0.isEmpty , "Required field")
-    } else {
-        return (!$0.isEmpty , "Required field")
-    }
-    }
+    @ObservedObject var viewModel: SignUpVM
     
     @State private var selectedPos = ""
     var positions: [String] = ["yes", "no", "aboba"]
     
     var body: some View {
-        VStack( spacing: 24){
-            VStack(spacing: 32) {
-                CustomTextField(
-                    validate: nameFieldValidation,
-                    placeholder:  "Your name",
-                    text: $text1
-                )
-                CustomTextField(
-                    validate: emailFieldValidation,
-                    placeholder:  "Email",
-                    text: $text2
-                )
-                CustomTextField(
-                    subText: "+38 (XXX) XXX - XX - XX",
-                    validate: phoneFieldValidation,
-                    placeholder:  "Phone",
-                    text: $text3
-                )
-            }
-            
-            Text("Select your position")
-                .font(UIConstraints.fontRegular(size: 18))
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            RadioButtonGroup(items: positions) { selected in
-                selectedPos = selected
-            }
+        ScrollView(showsIndicators: false){
+            VStack( spacing: 24){
+                VStack(spacing: 32) {
+                    CustomTextField(
+                        validationREsult: viewModel.$nameValidationResult,
+                        placeholder:  "Your name",
+                        text: viewModel.$name
+                    )
+                    CustomTextField(
+                        validationREsult: viewModel.$phoneValidationResult,
+                        placeholder:  "Email",
+                        text: viewModel.$email
+                    )
+                    CustomTextField(
+                        subText: "+38 (XXX) XXX - XX - XX",
+                        validationREsult: viewModel.$phoneValidationResult,
+                        placeholder:  "Phone",
+                        text: viewModel.$phone
+                    )
+                }
                 
-            ZStack {
-                CustomTextField(
-                    validate: nameFieldValidation,
-                    placeholder:  "Your name",
-                    text: $text1
-                )
-            }
+                Text("Select your position")
+                    .font(UIConstraints.fontRegular(size: 18))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                RadioButtonGroup(items: positions) { selected in
+                    selectedPos = selected
+                }
+                
+                ZStack {
+                    CustomTextField(
+                        subText: "Photo size < 5 MB",
+                        validationREsult: viewModel.$photoValidationResult,
+                        placeholder:  "Upload your photo",
+                        text: viewModel.$name//TODO insert photo name
+                    ).disabled(true)
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("select")
+                    }
+                    
+                }
                 //TODO picker
                 Button {
                     
@@ -81,12 +73,13 @@ struct SignupView: View {
             .padding(.horizontal, 16)
         }
     }
-    
-    
-    struct ContentView_Previews4: PreviewProvider {
-        static var previews: some View {
-            SignupView()
-        }
+}
+
+
+struct ContentView_Previews4: PreviewProvider {
+    static var previews: some View {
+        SignupView(viewModel: SignUpVM())
     }
-    
-    
+}
+
+

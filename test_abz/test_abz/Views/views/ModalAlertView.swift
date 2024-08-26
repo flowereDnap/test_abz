@@ -8,16 +8,18 @@
 import Foundation
 import SwiftUI
 
+enum AlertType {
+    case noConnection
+    case signUpSuccess
+    case signUpFail
+}
+
 struct ModalAlertView: View {
     
-    @State var type: AllertType
+    @State var type: AlertType
     @Binding var isPresented: Bool
     
-    enum AllertType {
-        case noConnection
-        case signUpSuccess
-        case signUpFail
-    }
+    
     
     var supportingText: String = ""
     var imageName: String = ""
@@ -25,8 +27,9 @@ struct ModalAlertView: View {
     
     var completion: ()->Void
     
-    init(type: AllertType, supportingText: String?, isPresented: Binding<Bool>, complition: @escaping ()->Void) {
-        self.message = message
+    init(type: AlertType, supportingText: String?, isPresented: Binding<Bool>, complition: @escaping ()->Void) {
+        self.type = type
+        self.supportingText = supportingText ?? " "
         
         if let supportingText = supportingText {
             self.supportingText = supportingText
@@ -85,7 +88,7 @@ struct InputTextField_Previews2: PreviewProvider {
         @State var bool = true
 
         var body: some View {
-            ModalAlertView(message: .noConnection, supportingText: nil, isPresented: $bool) {
+            ModalAlertView(type: .noConnection, supportingText: nil, isPresented: $bool) {
             }
         }
     }

@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042CBF4D2C7C525E0008E226 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF4C2C7C525E0008E226 /* LabelStyle.swift */; };
 		046264D92C743A0C0057CEED /* UIConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264D82C743A0C0057CEED /* UIConstraints.swift */; };
 		046264DC2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */; };
 		046264DE2C7443380057CEED /* NunitoSans_7pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */; };
 		046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264E02C74486B0057CEED /* PrimaryButton.swift */; };
 		046264E32C74487B0057CEED /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264E22C74487B0057CEED /* SecondaryButton.swift */; };
 		046264E52C7450E30057CEED /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264E42C7450E30057CEED /* TextField.swift */; };
+		04707FDA2C7B6355005080DE /* UsersListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04707FD82C7B6355005080DE /* UsersListVM.swift */; };
+		04707FDD2C7B639C005080DE /* signUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04707FDC2C7B639C005080DE /* signUpVM.swift */; };
 		0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4D92C73E46000790B5C /* test_abzApp.swift */; };
 		0474F4DC2C73E46000790B5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0474F4DB2C73E46000790B5C /* ContentView.swift */; };
 		0474F4DE2C73E46300790B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0474F4DD2C73E46300790B5C /* Assets.xcassets */; };
@@ -32,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042CBF4C2C7C525E0008E226 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		046264D82C743A0C0057CEED /* UIConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstraints.swift; sourceTree = "<group>"; };
 		046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans_7pt-SemiBold.ttf"; sourceTree = "<group>"; };
 		046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans_7pt-Regular.ttf"; sourceTree = "<group>"; };
@@ -39,6 +43,8 @@
 		046264E02C74486B0057CEED /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		046264E22C74487B0057CEED /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		046264E42C7450E30057CEED /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		04707FD82C7B6355005080DE /* UsersListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListVM.swift; sourceTree = "<group>"; };
+		04707FDC2C7B639C005080DE /* signUpVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpVM.swift; sourceTree = "<group>"; };
 		0474F4D62C73E46000790B5C /* test_abz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_abz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0474F4D92C73E46000790B5C /* test_abzApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_abzApp.swift; sourceTree = "<group>"; };
 		0474F4DB2C73E46000790B5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +119,8 @@
 		0474F4D82C73E46000790B5C /* test_abz */ = {
 			isa = PBXGroup;
 			children = (
+				04707FDC2C7B639C005080DE /* signUpVM.swift */,
+				04707FD82C7B6355005080DE /* UsersListVM.swift */,
 				046264DF2C7445530057CEED /* test-abz-Info.plist */,
 				046264D72C7438F70057CEED /* Views */,
 				0474F4E72C73E4A400790B5C /* Model */,
@@ -174,6 +182,7 @@
 				046264E22C74487B0057CEED /* SecondaryButton.swift */,
 				046264E42C7450E30057CEED /* TextField.swift */,
 				04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */,
+				042CBF4C2C7C525E0008E226 /* LabelStyle.swift */,
 			);
 			path = basicElements;
 			sourceTree = "<group>";
@@ -338,17 +347,20 @@
 				046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */,
 				0474F4EB2C73E73800790B5C /* User.swift in Sources */,
 				0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */,
+				04707FDD2C7B639C005080DE /* signUpVM.swift in Sources */,
 				046264E52C7450E30057CEED /* TextField.swift in Sources */,
 				04A0D21A2C76075F00F01C63 /* ModalAlertView.swift in Sources */,
 				0474F4F82C73F9C700790B5C /* KeychainHelper.swift in Sources */,
 				0474F4F52C73F3EE00790B5C /* Responces.swift in Sources */,
 				0474F4F02C73F18700790B5C /* Errors.swift in Sources */,
+				042CBF4D2C7C525E0008E226 /* LabelStyle.swift in Sources */,
 				0474F4E92C73E4CA00790B5C /* NWManager.swift in Sources */,
 				04A0D21C2C77344D00F01C63 /* UserCellView.swift in Sources */,
 				04A0D2172C76043200F01C63 /* signUpView.swift in Sources */,
 				04A0D2152C76042200F01C63 /* usersListView.swift in Sources */,
 				046264D92C743A0C0057CEED /* UIConstraints.swift in Sources */,
 				0474F4F32C73F1B500790B5C /* CacheManager.swift in Sources */,
+				04707FDA2C7B6355005080DE /* UsersListVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,17 +1,26 @@
 import Foundation
 import SwiftUI
 
-class usersListVM: ObservableObject {
+class UsersListVM: ObservableObject {
     @Published var users: [User] = []
     private var currentPage: Int = 1
     private let itemsPerPage: Int = 6
     private let cacheManager = CacheImageManager()
 
-    @Binding var isPresented: Bool
-    @Binding var allertType: AllertType
+     var isPresented: Binding<Bool>?
+     var alertType: Binding<AlertType>?
+    
+    init(isPresented: Binding<Bool>, alertType: Binding<AlertType>) {
+        self.isPresented = isPresented
+        self.alertType = alertType
+    }
+    
+    init() {
+        
+    }
 
     func fetchNextPage() {
-        NWManager.shared.fetchUsers(page: currentPage, itemsPerPage: itemsPerPage) { [weak self] result in
+        NWManager.shared.fetchUsers(page: currentPage + 1, itemsPerPage: itemsPerPage) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -19,9 +28,9 @@ class usersListVM: ObservableObject {
                 self.users.append(contentsOf: fetchedUsers)
                 self.currentPage += 1
                 
-            case .failure(let error):
-                allertType = .noConnection
-                isPresented = true
+            case .failure(_):
+                alertType?.wrappedValue = .noConnection
+                isPresented?.wrappedValue = true
             }
         }
     }
@@ -40,8 +49,8 @@ class usersListVM: ObservableObject {
                     self?.cacheManager.cacheImage(downloadedImage, forKey: user.photo)
                     bindingImage.wrappedValue = downloadedImage
                 }
-            case .failure:
-                // Handle failure (optional)
+            case .failure(let error):
+                print(error)
                 break
             }
         }

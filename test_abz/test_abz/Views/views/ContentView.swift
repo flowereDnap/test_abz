@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isFullScreenPresented = false
-    @State private var allertTypeInvoked: AllertType = .noConnection
+    @State var isFullScreenPresented = false
+    @State var alertTypeInvoked: AlertType = .noConnection
     
-    @State private var selectedTab: Tab = .users
+    @State var selectedTab: Tab = .users
+    
+    @StateObject var usersListVM: UsersListVM
+    @StateObject var signUpVM: SignUpVM = SignUpVM()
     
     enum Tab {
         case users
         case signup
     }
+    
     
     
     var body: some View {
@@ -28,34 +32,40 @@ struct ContentView: View {
                         .padding(16)
                         .frame(maxWidth: .infinity)
                         .background(UIConstraints.primary)
-                    TabView {
+                    
+                    TabView(selection: $selectedTab) {
                         
-                        UsersView(list: [])
+                        UsersView(viewModel: usersListVM)
                             .tabItem {
-                                Label("Users", systemImage: "person.3")
+                                Label("Users", systemImage: "person.3").labelStyle(hStyle())
                             }
-                            .tag(Tab.users)
+                            .tag(ContentView.Tab.users)
                         
-                        SignupView()
+                        SignupView(viewModel: signUpVM)
                             .tabItem {
                                 Label("Signup", systemImage: "person.badge.plus")
                             }
                             .tag(Tab.signup)
                     }
                     .fullScreenCover(isPresented: $isFullScreenPresented) {
-                        ModalAlertView(type: allertTypeInvoked, supportingText: nil, isPresented: $isFullScreenPresented) {
+                        ModalAlertView(type: alertTypeInvoked, supportingText: nil, isPresented: $isFullScreenPresented) {
                             
                         }
                     }
                     
                 }
+                
             }
             .padding(.top, proxy.safeAreaInsets.top > 0 ? 0.2 : 0)
+            .onAppear(){
+                usersListVM.isPresented = $isFullScreenPresented
+                usersListVM.alertType = $alertTypeInvoked
+            }
         }
     }
     
 }
 
 #Preview {
-    ContentView()
+    ContentView(usersListVM: UsersListVM())
 }
