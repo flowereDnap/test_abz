@@ -11,7 +11,7 @@ struct ContentView: View {
     @State var isFullScreenPresented = false
     @State var alertTypeInvoked: AlertType = .noConnection
     
-    @State var selectedTab: Tab = .users
+    @State var selectedTab = TabType.Users
     
     @StateObject var usersListVM: UsersListVM
     @StateObject var signUpVM: SignUpVM = SignUpVM()
@@ -27,26 +27,22 @@ struct ContentView: View {
         GeometryReader { proxy in
             NavigationView {
                 VStack{
-                    Text(selectedTab == .users ? "Working with GET request" : "Working with POST request")
+                    Text(selectedTab == .Users ? "Working with GET request" : "Working with POST request")
                         .font(UIConstraints.fontRegular(size: 20))
                         .padding(16)
                         .frame(maxWidth: .infinity)
                         .background(UIConstraints.primary)
                     
-                    TabView(selection: $selectedTab) {
-                        
-                        UsersView(viewModel: usersListVM)
-                            .tabItem {
-                                Label("Users", systemImage: "person.3").labelStyle(hStyle())
-                            }
-                            .tag(ContentView.Tab.users)
-                        
-                        SignupView(viewModel: signUpVM)
-                            .tabItem {
-                                Label("Signup", systemImage: "person.badge.plus")
-                            }
-                            .tag(Tab.signup)
+                    
+                    ZStack {
+                        switch selectedTab {
+                        case .Users: UsersView(viewModel: usersListVM).environmentObject(usersListVM)
+                        case .SignUp:  SignupView(viewModel: signUpVM, selectedImage: signUpVM.$photo).environmentObject(signUpVM)
+                        }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    CustomTabBar(selection: $selectedTab)
                     .fullScreenCover(isPresented: $isFullScreenPresented) {
                         ModalAlertView(type: alertTypeInvoked, supportingText: nil, isPresented: $isFullScreenPresented) {
                             

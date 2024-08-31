@@ -32,19 +32,13 @@ struct UsersView: View {
                 }.buttonStyle(PrimaryButtonStyle())
                 
             } else {
-
-                            
+                
+                
                 
                 List(viewModel.users) { user in
-                    
-                    @State var image: UIImage = UIImage(named: "photo-cover")!
-                    
-                    UserCellView(user: user, image: image)
-                        .onAppear{
-                            print("loading")
-                            viewModel.fetchUserImage(for: user, bindingImage: $image)
-                                }
-                        }
+ 
+                    UserCellView(user: user)
+                }
                 
                 .listStyle(PlainListStyle())
                 .listRowInsets(EdgeInsets())
@@ -60,13 +54,13 @@ struct UsersView_Previews: PreviewProvider {
     struct Wrapper: View {
         @State private var isPresented: Bool = false
         @State private var allertType: AlertType = .noConnection
-
+        
         var body: some View {
             UsersView(viewModel: UsersListVM(isPresented: $isPresented, alertType: $allertType))
         }
     }
-
+    
     static var previews: some View {
-        Wrapper()
+        Wrapper().environmentObject(UsersListVM())
     }
 }

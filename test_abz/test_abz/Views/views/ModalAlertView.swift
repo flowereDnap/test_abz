@@ -56,7 +56,7 @@ struct ModalAlertView: View {
     var body: some View {
         VStack(spacing: 24) {
             HStack {
-                            Spacer()
+                Spacer()
                             Button(action: {
                                 isPresented = false
                             }) {
@@ -68,7 +68,7 @@ struct ModalAlertView: View {
                             }
                             .padding()
                         }
-            
+            Spacer()
             Image(imageName)
             Text(supportingText)
             Button {
@@ -77,6 +77,7 @@ struct ModalAlertView: View {
             } label: {
                 Text(buttonText)
             }.buttonStyle(PrimaryButtonStyle())
+            Spacer()
         }
     }
 }

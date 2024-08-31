@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		042CBF4D2C7C525E0008E226 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF4C2C7C525E0008E226 /* LabelStyle.swift */; };
+		042CBF512C81A2EA0008E226 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF502C81A2E80008E226 /* CustomTabView.swift */; };
+		042CBF532C832BDE0008E226 /* CameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF522C832BDD0008E226 /* CameraPicker.swift */; };
+		042CBF552C832DCB0008E226 /* GalleryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF542C832DCB0008E226 /* GalleryPicker.swift */; };
 		046264D92C743A0C0057CEED /* UIConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046264D82C743A0C0057CEED /* UIConstraints.swift */; };
 		046264DC2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */; };
 		046264DE2C7443380057CEED /* NunitoSans_7pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		042CBF4C2C7C525E0008E226 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
+		042CBF502C81A2E80008E226 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		042CBF522C832BDD0008E226 /* CameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPicker.swift; sourceTree = "<group>"; };
+		042CBF542C832DCB0008E226 /* GalleryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPicker.swift; sourceTree = "<group>"; };
 		046264D82C743A0C0057CEED /* UIConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstraints.swift; sourceTree = "<group>"; };
 		046264DB2C74416C0057CEED /* NunitoSans_7pt-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans_7pt-SemiBold.ttf"; sourceTree = "<group>"; };
 		046264DD2C7443380057CEED /* NunitoSans_7pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NunitoSans_7pt-Regular.ttf"; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 				04A0D2182C76045400F01C63 /* styling */,
 				04A0D2132C7603FE00F01C63 /* views */,
 				04A0D2122C7603ED00F01C63 /* basicElements */,
+				042CBF522C832BDD0008E226 /* CameraPicker.swift */,
+				042CBF542C832DCB0008E226 /* GalleryPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +191,7 @@
 				046264E42C7450E30057CEED /* TextField.swift */,
 				04A0D21D2C788F7000F01C63 /* RadioButtonGroup.swift */,
 				042CBF4C2C7C525E0008E226 /* LabelStyle.swift */,
+				042CBF502C81A2E80008E226 /* CustomTabView.swift */,
 			);
 			path = basicElements;
 			sourceTree = "<group>";
@@ -347,6 +356,7 @@
 				046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */,
 				0474F4EB2C73E73800790B5C /* User.swift in Sources */,
 				0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */,
+				042CBF512C81A2EA0008E226 /* CustomTabView.swift in Sources */,
 				04707FDD2C7B639C005080DE /* signUpVM.swift in Sources */,
 				046264E52C7450E30057CEED /* TextField.swift in Sources */,
 				04A0D21A2C76075F00F01C63 /* ModalAlertView.swift in Sources */,
@@ -354,10 +364,12 @@
 				0474F4F52C73F3EE00790B5C /* Responces.swift in Sources */,
 				0474F4F02C73F18700790B5C /* Errors.swift in Sources */,
 				042CBF4D2C7C525E0008E226 /* LabelStyle.swift in Sources */,
+				042CBF532C832BDE0008E226 /* CameraPicker.swift in Sources */,
 				0474F4E92C73E4CA00790B5C /* NWManager.swift in Sources */,
 				04A0D21C2C77344D00F01C63 /* UserCellView.swift in Sources */,
 				04A0D2172C76043200F01C63 /* signUpView.swift in Sources */,
 				04A0D2152C76042200F01C63 /* usersListView.swift in Sources */,
+				042CBF552C832DCB0008E226 /* GalleryPicker.swift in Sources */,
 				046264D92C743A0C0057CEED /* UIConstraints.swift in Sources */,
 				0474F4F32C73F1B500790B5C /* CacheManager.swift in Sources */,
 				04707FDA2C7B6355005080DE /* UsersListVM.swift in Sources */,

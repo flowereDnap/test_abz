@@ -11,17 +11,21 @@ import SwiftUI
 
 struct UserCellView: View {
     
+    @EnvironmentObject var viewModel: UsersListVM
     var user: User
-    var image: UIImage = UIImage(imageLiteralResourceName: "photo-cover")
-    
+    @State private var image: UIImage = UIImage(named: "photo-cover")!
     
     
     var body: some View {
-        HStack(alignment: .top){
+        HStack(alignment: .top, spacing: 0){
                 Image(uiImage: image)
                     .resizable()
                     .frame(width: 50, height: 50)
+                    .clipShape(Circle())
                     .padding(.trailing, 16)
+                    .onAppear {
+                                        viewModel.fetchUserImage(for: user, bindingImage: $image)
+                                    }
             VStack(alignment: .leading, spacing: 0){
                 Text(user.name)
                         .font(UIConstraints.fontRegular(size: 18))
@@ -51,15 +55,29 @@ struct UserCellView: View {
     }
 }
 
-#Preview {
-    UserCellView(user: User(id: 0,
-                            registrationTimestamp: 0,
-                            name:    "Seraphina Anastasia Isolde Aurelia Celestina von Hohenzollern",
-                            email:
-                            "maximus_wilderman_ronaldo_schuppe@gmail.com",
-                            phone: "+38 (098) 278 76 24",
-                            positionId: 1,
-                            position: "Backend developer",
-                            photo: "")
-    )
+
+struct ContentView_PreviewsUserList: PreviewProvider {
+    struct Wrapper: View {
+        @State private var isPresented: UIImage = UIImage(named: "photo-cover")!
+      
+
+        var body: some View {
+            
+            UserCellView(user: User(id: 0,
+                                    registrationTimestamp: 0,
+                                    name:    "Seraphina Anastasia Isolde Aurelia Celestina von Hohenzollern",
+                                    email:
+                                    "maximus_wilderman_ronaldo_schuppe@gmail.com",
+                                    phone: "+38 (098) 278 76 24",
+                                    positionId: 1,
+                                    position: "Backend developer",
+                                    photo: "")
+            )
+            
+        }
+    }
+
+    static var previews: some View {
+        Wrapper().environmentObject(UsersListVM())
+    }
 }
