@@ -8,20 +8,30 @@
 import Foundation
 import SwiftUI
 
-struct RadioButtonGroup: View {
+protocol RadioButtonItem {
+    var id: Int { get set }
+    var name: String { get set }
+}
+
+struct RadioButtonGroup<T: RadioButtonItem>: View {
     
-    let items : [String]
+    @Binding var items : [T]
     
     @State var selectedId: String = ""
+    
+    @State private var contentHeight: CGFloat = 0
     
     let callback: (String) -> ()
     
     var body: some View {
-        VStack {
-            ForEach(0..<items.count) { index in
-                RadioButton(self.items[index], callback: self.radioGroupCallback, selectedID: self.selectedId)
+        VStack(spacing: 0) {
+            ForEach(items, id: \.id) { item in
+            RadioButton(item.name, callback: self.radioGroupCallback, selectedID: self.selectedId)
+                    .padding(0)
             }
+
         }
+
     }
     
     func radioGroupCallback(id: String) {
@@ -77,12 +87,31 @@ struct RadioButton: View {
             }.foregroundColor(self.color)
         }
         .foregroundColor(self.color)
+        .padding(0)
     }
 }
 
 
-#Preview() {
-    RadioButtonGroup(items: ["Rome", "London", "Paris", "Berlin", "New York"], selectedId: "London") { selected in
-                    print("Selected is: \(selected)")
+
+struct InputTextField_PreviewsRadio: PreviewProvider {
+    struct Wrapper: View {
+        
+        @State var data = [
+        Position(id: 1, name: "1"),
+        Position(id: 1, name: "1"),
+        Position(id: 1, name: "1")]
+        
+        var body: some View {
+            ScrollView{
+                RadioButtonGroup<Position>(items: $data, selectedId: "London") { selected in
+                    
                 }
+                .frame(height: 200)
+            }
+        }
+    }
+
+    static var previews: some View {
+        Wrapper()
+    }
 }

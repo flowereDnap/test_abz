@@ -25,7 +25,6 @@ struct UsersView: View {
                     .font(UIConstraints.fontRegular(size: 20))
                 Button {
                     viewModel.fetchNextPage()
-                    print("pressed")
                 } label: {
                     Text("Reload")
                         .font(UIConstraints.fontRegular(size: 20))

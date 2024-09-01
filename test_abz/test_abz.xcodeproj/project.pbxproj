@@ -84,6 +84,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042CBF562C84C7440008E226 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				04707FDC2C7B639C005080DE /* signUpVM.swift */,
+				04707FD82C7B6355005080DE /* UsersListVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		042CBF582C84C7A60008E226 /* UsersList */ = {
+			isa = PBXGroup;
+			children = (
+				04A0D2142C76042200F01C63 /* usersListView.swift */,
+				04A0D21B2C77344D00F01C63 /* UserCellView.swift */,
+			);
+			path = UsersList;
+			sourceTree = "<group>";
+		};
+		042CBF592C84C7BE0008E226 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				04A0D2162C76043200F01C63 /* signUpView.swift */,
+				042CBF522C832BDD0008E226 /* CameraPicker.swift */,
+				042CBF542C832DCB0008E226 /* GalleryPicker.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		046264D72C7438F70057CEED /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,8 +119,6 @@
 				04A0D2182C76045400F01C63 /* styling */,
 				04A0D2132C7603FE00F01C63 /* views */,
 				04A0D2122C7603ED00F01C63 /* basicElements */,
-				042CBF522C832BDD0008E226 /* CameraPicker.swift */,
-				042CBF542C832DCB0008E226 /* GalleryPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -127,8 +153,7 @@
 		0474F4D82C73E46000790B5C /* test_abz */ = {
 			isa = PBXGroup;
 			children = (
-				04707FDC2C7B639C005080DE /* signUpVM.swift */,
-				04707FD82C7B6355005080DE /* UsersListVM.swift */,
+				042CBF562C84C7440008E226 /* ViewModels */,
 				046264DF2C7445530057CEED /* test-abz-Info.plist */,
 				046264D72C7438F70057CEED /* Views */,
 				0474F4E72C73E4A400790B5C /* Model */,
@@ -199,11 +224,10 @@
 		04A0D2132C7603FE00F01C63 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				04A0D2142C76042200F01C63 /* usersListView.swift */,
-				04A0D2162C76043200F01C63 /* signUpView.swift */,
 				0474F4DB2C73E46000790B5C /* ContentView.swift */,
 				04A0D2192C76075F00F01C63 /* ModalAlertView.swift */,
-				04A0D21B2C77344D00F01C63 /* UserCellView.swift */,
+				042CBF592C84C7BE0008E226 /* SignUp */,
+				042CBF582C84C7A60008E226 /* UsersList */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -211,8 +235,8 @@
 		04A0D2182C76045400F01C63 /* styling */ = {
 			isa = PBXGroup;
 			children = (
-				046264DA2C7440740057CEED /* fonts */,
 				046264D82C743A0C0057CEED /* UIConstraints.swift */,
+				046264DA2C7440740057CEED /* fonts */,
 			);
 			path = styling;
 			sourceTree = "<group>";

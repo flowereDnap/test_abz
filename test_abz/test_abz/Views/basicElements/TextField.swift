@@ -11,32 +11,31 @@ import SwiftUI
 struct CustomTextField: View {
     
     var subText: String = " "
-    @Binding var validationREsult: (Bool, String) {
-        //upd view state on results from VM
-        didSet {
-            //update state onli once finished editing
-            if !isEditing{
-                //self.error =  .0
+    
+    @Binding var validationResult: (Bool, String)
+    
+    var placeholder: String
+    
+    
+    @Binding var text: String {
+        didSet{
+            if !isEditing {
+                isFilled = !text.isEmpty
             }
         }
     }
-    var placeholder: String
     
-    @State var errorMessage: String = " "
-    
-    @Binding var text: String
     
     @State var isEditing: Bool = false
-    @State var error: Bool = false
     @State var isFilled: Bool = false
     
     var placeholderColor: Color {
-        if error { return .red }
+        if isFilled && !validationResult.0  { return .red }
         if (!isFilled && isEditing) { return UIConstraints.secondary }
         return UIConstraints.black60
     }
     var borderColor: Color {
-        if error {return .red}
+        if !validationResult.0 && isFilled {return .red}
         if isEditing {return UIConstraints.secondary}
         return Color(red: 0.81, green: 0.81, blue: 0.81)
     }
@@ -53,7 +52,7 @@ struct CustomTextField: View {
                 TextField("", text: $text, onEditingChanged: { isEditing in
                     withAnimation(.default) {
                         self.isEditing = isEditing
-                        self.isFilled = !text.isEmpty
+                        self.isFilled = (!text.isEmpty && !isEditing)
                     }
                 })
                 .font(UIConstraints.fontRegular(size: 16))
@@ -66,14 +65,14 @@ struct CustomTextField: View {
                 
             }
             .frame(height: 56)
-            .animation(.default, value: error)
+            .animation(.default, value: (validationResult.0 && isFilled))
             .padding(0)
             
-            Text( error ? errorMessage : subText )
+            Text(  (!validationResult.0 && !isEditing && isFilled)  ?  validationResult.1 : subText )
                 .frame(height: 16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 16)
-                .foregroundColor(error ? .red : UIConstraints.black60)
+                .foregroundColor((!validationResult.0 && !isEditing && isFilled) ?  .red : UIConstraints.black60)
                 .font(UIConstraints.fontRegular(size: 14))
             
         }
@@ -84,13 +83,14 @@ struct CustomTextField: View {
 
 struct InputTextField_Previews: PreviewProvider {
     struct Wrapper: View {
-        @State private var text: String = ""
-        @State private var validationResult: (Bool,String) = (true, " ")
+        
+        @State var text:String = ""
+        @State private var validationResult: (Bool,String) = (true, "error")
 
         var body: some View {
             CustomTextField(
                 subText: "promt",
-                validationREsult: $validationResult,
+                validationResult: $validationResult,
                 placeholder:  "placeholder",
                 text: $text
             )

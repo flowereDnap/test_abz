@@ -17,7 +17,8 @@ enum AlertType {
 struct ModalAlertView: View {
     
     @State var type: AlertType
-    @Binding var isPresented: Bool
+    
+    var isPresented: Binding<Bool>?
     
     
     
@@ -27,9 +28,8 @@ struct ModalAlertView: View {
     
     var completion: ()->Void
     
-    init(type: AlertType, supportingText: String?, isPresented: Binding<Bool>, complition: @escaping ()->Void) {
+    init(type: AlertType, supportingText: String?, isPresented: Binding<Bool>?, complition: @escaping ()->Void) {
         self.type = type
-        self.supportingText = supportingText ?? " "
         
         if let supportingText = supportingText {
             self.supportingText = supportingText
@@ -44,12 +44,12 @@ struct ModalAlertView: View {
                 self.imageName = "signUp-success-image"
                 self.buttonText = "Got it"
             case .signUpFail:
-                self.supportingText = ""
+                self.supportingText = "Something went wrong, try again later"
                 self.imageName = "signUp-fail-image"
                 self.buttonText = "Try again"
             }
         }
-        self._isPresented = isPresented
+        self.isPresented = isPresented
         self.completion = complition
     }
     
@@ -58,7 +58,7 @@ struct ModalAlertView: View {
             HStack {
                 Spacer()
                             Button(action: {
-                                isPresented = false
+                                isPresented?.wrappedValue = false
                             }) {
                                 Image(systemName: "xmark")
                                     .foregroundColor(.black)
@@ -72,7 +72,7 @@ struct ModalAlertView: View {
             Image(imageName)
             Text(supportingText)
             Button {
-                isPresented = false
+                isPresented?.wrappedValue = false
                 completion()
             } label: {
                 Text(buttonText)
@@ -89,7 +89,7 @@ struct InputTextField_Previews2: PreviewProvider {
         @State var bool = true
 
         var body: some View {
-            ModalAlertView(type: .noConnection, supportingText: nil, isPresented: $bool) {
+            ModalAlertView(type: .signUpFail, supportingText: nil, isPresented: $bool) {
             }
         }
     }

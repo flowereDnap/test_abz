@@ -9,12 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isFullScreenPresented = false
-    @State var alertTypeInvoked: AlertType = .noConnection
+    @State var alertView: ModalAlertView = ModalAlertView(type: .noConnection, supportingText: nil, isPresented: nil) {
+        
+    }
     
     @State var selectedTab = TabType.Users
     
     @StateObject var usersListVM: UsersListVM
-    @StateObject var signUpVM: SignUpVM = SignUpVM()
+    @StateObject var signUpVM: SignUpVM
     
     enum Tab {
         case users
@@ -37,16 +39,14 @@ struct ContentView: View {
                     ZStack {
                         switch selectedTab {
                         case .Users: UsersView(viewModel: usersListVM).environmentObject(usersListVM)
-                        case .SignUp:  SignupView(viewModel: signUpVM, selectedImage: signUpVM.$photo).environmentObject(signUpVM)
+                        case .SignUp:  SignupView(viewModel: signUpVM).environmentObject(signUpVM)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
                     CustomTabBar(selection: $selectedTab)
                     .fullScreenCover(isPresented: $isFullScreenPresented) {
-                        ModalAlertView(type: alertTypeInvoked, supportingText: nil, isPresented: $isFullScreenPresented) {
-                            
-                        }
+                        alertView
                     }
                     
                 }
@@ -54,8 +54,9 @@ struct ContentView: View {
             }
             .padding(.top, proxy.safeAreaInsets.top > 0 ? 0.2 : 0)
             .onAppear(){
-                usersListVM.isPresented = $isFullScreenPresented
-                usersListVM.alertType = $alertTypeInvoked
+                alertView.isPresented = $isFullScreenPresented
+                usersListVM.alertView = $alertView
+                signUpVM.alertView = $alertView
             }
         }
     }
@@ -63,5 +64,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(usersListVM: UsersListVM())
+    ContentView(usersListVM: UsersListVM(), signUpVM: SignUpVM())
 }

@@ -12,7 +12,7 @@ struct test_abzApp: App {
     var body: some Scene {
         WindowGroup {
             
-            ContentView( usersListVM: UsersListVM())
+            ContentView( usersListVM: UsersListVM(), signUpVM: SignUpVM())
         }
     }
 }

@@ -16,9 +16,14 @@ struct TokenResponse: Decodable {
     let token: String
 }
 
-struct PositionsResponse: Decodable {
+struct PositionsResponse: Codable {
     let success: Bool
-    let positions: [Int:String]
+    let positions: [Position]
+}
+
+struct Position: Codable, RadioButtonItem {
+    var id: Int
+    var name: String
 }
 
 struct UsersResponse: Decodable {

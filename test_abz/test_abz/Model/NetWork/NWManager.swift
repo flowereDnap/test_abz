@@ -135,40 +135,36 @@ class NWManager {
         }
     }
     
-    func fetchPositions(completion: @escaping (Result<[Int:String], Error>) -> Void) {
+
+    func fetchPositions(completion: @escaping (Result<[Position], Error>) -> Void) {
         let url = baseURL + "/positions"
         
         AF.request(url, method: .get).response { response in
-            //general check if Alamofire succeded and we got any response
             switch response.result {
-            case .success(let success):
-                
-                let data = response.data!
+            case .success(let data):
+             
                 
                 do {
-                    //check if we got positive respose or not
-                    let jsonObject = try JSONSerialization.jsonObject(with: data)
-                    guard let dict = jsonObject as? [String: Any], let sussess = dict["success"] as? Bool else {
-                        return
-                    }
-                    
-                    if sussess {
-                        let positionsResponse = try JSONDecoder().decode(PositionsResponse.self, from: data)
+                    if let data = data, let jsonString = String(data: data, encoding: .utf8) {
+                        
+                        // Decode the data into the PositionsResponse struct
+                        let positionsResponse = try JSONDecoder().decode(PositionsResponse.self, from: data ?? Data())
+                        
+                        // Pass the resulting dictionary to the completion handler
                         completion(.success(positionsResponse.positions))
-                    } else {
-                        let errorResponce = try JSONDecoder().decode(ErrorResponse.self, from: data)
-                        completion(.failure(NWManagerError.errorResponce(errorResponce)))
                     }
-                }
-                catch {
+                } catch {
+                    // Handle decoding errors
                     completion(.failure(NWManagerError.decodingError))
                 }
-            case .failure(let failure):
+                
+            case .failure:
+                // Handle network errors
                 completion(.failure(NWManagerError.networkError))
             }
-            
         }
     }
+
     
     func fetchToken(completion: @escaping (Result<String, Error>) -> Void) {
         let url = baseURL + "/token"
@@ -214,7 +210,7 @@ class NWManager {
                   phone:String,
                   positionId: Int,
                   photoData: Data,
-                  completion: @escaping (Result<Bool, Error>) -> Void) {
+                  completion: @escaping (Result<Bool, NWManagerError>) -> Void) {
         let url = baseURL + "/users"
         
         let headers: HTTPHeaders = [

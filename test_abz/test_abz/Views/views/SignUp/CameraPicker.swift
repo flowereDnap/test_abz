@@ -3,6 +3,7 @@ import UIKit
 
 struct CameraPicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
+    @Binding var name: String 
     @Environment(\.presentationMode) var presentationMode
 
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -15,6 +16,11 @@ struct CameraPicker: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
                 parent.selectedImage = image
+                
+                if let imageURL = info[.imageURL] as? URL {
+                                   let fileName = imageURL.lastPathComponent
+                    parent.name = fileName
+                               }
             }
             parent.presentationMode.wrappedValue.dismiss()
         }

@@ -11,7 +11,8 @@ import SwiftUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
     @Binding var selection: UIImage?
-
+    @Binding var name: String
+    
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
@@ -41,6 +42,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
             if provider.canLoadObject(ofClass: UIImage.self) {
                 provider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
                     self?.parent.selection = image as? UIImage
+                    self?.parent.name = provider.suggestedName ?? "image loaded"
                 }
             }
         }

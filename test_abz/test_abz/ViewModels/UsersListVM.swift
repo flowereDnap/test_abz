@@ -7,16 +7,14 @@ class UsersListVM: ObservableObject {
     private let itemsPerPage: Int = 6
     private let cacheManager = CacheImageManager()
 
-     var isPresented: Binding<Bool>?
-     var alertType: Binding<AlertType>?
+     var alertView: Binding<ModalAlertView>?
     
-    init(isPresented: Binding<Bool>, alertType: Binding<AlertType>) {
-        self.isPresented = isPresented
-        self.alertType = alertType
+    init(alertView: Binding<ModalAlertView>) {
+        self.alertView = alertView
     }
     
     init() {
-        
+     
     }
 
     func fetchNextPage() {
