@@ -16,68 +16,92 @@ enum AlertType {
 
 struct ModalAlertView: View {
     
-    @State var type: AlertType
+    var type: AlertType = .noConnection
     
     var isPresented: Binding<Bool>?
     
     
     
-    var supportingText: String = ""
-    var imageName: String = ""
-    var buttonText: String = ""
+    var supportingText: String? = nil
+    
+    var imageName: String {
+        switch type {
+        case .noConnection:
+            return "no-connection-image"
+        case .signUpSuccess:
+            return "signUp-success-image"
+        case .signUpFail:
+            return "signUp-fail-image"
+        }
+    }
+    
+    var buttonText: String {
+        switch type {
+        case .noConnection:
+            return "Try again"
+        case .signUpSuccess:
+            return "Got it"
+        case .signUpFail:
+            return "Try again"
+        }
+    }
     
     var completion: ()->Void
     
-    init(type: AlertType, supportingText: String?, isPresented: Binding<Bool>?, complition: @escaping ()->Void) {
-        self.type = type
-        
+    var displayText: String {
         if let supportingText = supportingText {
-            self.supportingText = supportingText
+            return supportingText
         } else {
             switch type {
             case .noConnection:
-                self.supportingText = "There is no internet Connection"
-                self.imageName = "no-connection-image"
-                self.buttonText = "Try again"
+                return "There is no internet Connection"
             case .signUpSuccess:
-                self.supportingText = "User successfully registered"
-                self.imageName = "signUp-success-image"
-                self.buttonText = "Got it"
+                return "User successfully registered"
             case .signUpFail:
-                self.supportingText = "Something went wrong, try again later"
-                self.imageName = "signUp-fail-image"
-                self.buttonText = "Try again"
+                return "Something went wrong, try again later"
             }
         }
+    }
+    
+    init(isPresented: Binding<Bool>?, complition: @escaping ()->Void) {
+        
         self.isPresented = isPresented
         self.completion = complition
     }
     
     var body: some View {
-        VStack(spacing: 24) {
+        ZStack(alignment: .topTrailing){
             HStack {
                 Spacer()
-                            Button(action: {
-                                isPresented?.wrappedValue = false
-                            }) {
-                                Image(systemName: "xmark")
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.2))
-                                    .clipShape(Circle())
-                            }
-                            .padding()
-                        }
-            Spacer()
-            Image(imageName)
-            Text(supportingText)
-            Button {
-                isPresented?.wrappedValue = false
-                completion()
-            } label: {
-                Text(buttonText)
-            }.buttonStyle(PrimaryButtonStyle())
-            Spacer()
+                Button(action: {
+                    isPresented?.wrappedValue = false
+                }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.black)
+                        .padding()
+                }
+                .padding()
+            }
+            
+            VStack(alignment: .center, spacing: 24) {
+                
+                Spacer()
+                Image(imageName)
+                Text(displayText)
+                    .font(UIConstraints.fontRegular(size: 20))
+                Button {
+                    isPresented?.wrappedValue = false
+                    completion()
+                } label: {
+                    Text(buttonText)
+                        
+                }.buttonStyle(PrimaryButtonStyle())
+                Spacer()
+            }
+            .frame(
+                  minWidth: 0,
+                  maxWidth: .infinity
+                )
         }
     }
 }
@@ -87,13 +111,13 @@ struct ModalAlertView: View {
 struct InputTextField_Previews2: PreviewProvider {
     struct Wrapper: View {
         @State var bool = true
-
+        
         var body: some View {
-            ModalAlertView(type: .signUpFail, supportingText: nil, isPresented: $bool) {
+            ModalAlertView(isPresented: $bool) {
             }
         }
     }
-
+    
     static var previews: some View {
         Wrapper()
     }

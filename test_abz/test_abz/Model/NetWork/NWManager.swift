@@ -18,6 +18,7 @@ class NWManager {
     private let baseURL = "https://frontend-test-assignment-api.abz.agency/api/v1"
     
     private let tokenKey = "authToken"
+    
     var authToken: String? {
         get {
             
@@ -100,13 +101,13 @@ class NWManager {
         }
     }
     
-    func fetchUser(id: Int, completion: @escaping (Result<User, Error>) -> Void) {
+    func fetchUser(id: Int, completion: @escaping (Result<UserResponse, Error>) -> Void) {
         let url = baseURL + "/user/\(id)"
         
         AF.request(url, method: .get).response { response in
             //general check if Alamofire succeded and we got any response
             switch response.result {
-            case .success(let success):
+            case .success(_):
                 
                 let data = response.data!
                 
@@ -119,7 +120,7 @@ class NWManager {
                     
                     if sussess {
                         let userResponce = try JSONDecoder().decode(UserResponse.self, from: data)
-                        completion(.success(userResponce.user))
+                        completion(.success(userResponce))
                     } else {
                         let errorResponce = try JSONDecoder().decode(ErrorResponse.self, from: data)
                         completion(.failure(NWManagerError.errorResponce(errorResponce)))
@@ -145,14 +146,14 @@ class NWManager {
              
                 
                 do {
-                    if let data = data, let jsonString = String(data: data, encoding: .utf8) {
+                    
                         
                         // Decode the data into the PositionsResponse struct
                         let positionsResponse = try JSONDecoder().decode(PositionsResponse.self, from: data ?? Data())
                         
                         // Pass the resulting dictionary to the completion handler
                         completion(.success(positionsResponse.positions))
-                    }
+                    
                 } catch {
                     // Handle decoding errors
                     completion(.failure(NWManagerError.decodingError))
@@ -250,7 +251,7 @@ class NWManager {
                     }
                     
                     if sussess {
-                        let usersResponce = try JSONDecoder().decode(UsersResponse.self, from: data)
+                        let usersResponce = try JSONDecoder().decode(UserResponse.self, from: data)
                         completion(.success(true))
                     } else {
                         let errorResponce = try JSONDecoder().decode(ErrorResponse.self, from: data)

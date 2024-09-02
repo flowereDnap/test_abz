@@ -13,7 +13,7 @@ class SignUpVM: ObservableObject {
             emailFieldValidation()
         }
     }
-    @Published var phone: String = ""
+    @Published var phone: String = "+380"
     {
         didSet {
             phoneFieldValidation()
@@ -47,13 +47,13 @@ class SignUpVM: ObservableObject {
         }
     }
     
-    @Published var nameValidationResult: (Bool, String) = (true, " ")
-    @Published var emailValidationResult: (Bool, String) = (true, " ")
-    @Published var phoneValidationResult: (Bool, String) = (true, " ")
-    @Published var photoValidationResult: (Bool, String) = (true, " ")
+    @Published var nameValidationResult: (Bool, String) = (false, "")
+    @Published var emailValidationResult: (Bool, String) = (false, "")
+    @Published var phoneValidationResult: (Bool, String) = (false, "")
+    @Published var photoValidationResult: (Bool, String) = (false, "")
     
     private let minResolution: CGSize = CGSize(width: 70, height: 70)
-    private let maxSizeMB = 5
+    private let maxSizeMB = 5.0
     
     var alertView: Binding<ModalAlertView>?
    
@@ -69,11 +69,23 @@ class SignUpVM: ObservableObject {
     
     
     func nameFieldValidation() {
-        nameValidationResult = (!name.isEmpty , "Required field")
+        if name.isEmpty {
+            nameValidationResult = ( false  , "Required field")
+            updAllValid()
+            return
+        }
+        nameValidationResult = ( name.count > 1  , "At least 2 characters")
         updAllValid()
     }
     
     func emailFieldValidation() {
+        let cleared = email.lowercased()
+        
+        if cleared != email {
+            email = cleared
+            return
+        }
+        
         if email.isEmpty {
             emailValidationResult =  ( false , "Required field")
         } else {
@@ -81,7 +93,7 @@ class SignUpVM: ObservableObject {
             let emailRegEx = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$"
             let emailPred = NSPredicate(format:"SELF MATCHES[c] %@", emailRegEx)
             
-            emailValidationResult = ( emailPred.evaluate(with: email) , "Wrong email")
+            emailValidationResult = ( emailPred.evaluate(with: email) , "Wrong email format")
         }
         updAllValid()
     }
@@ -98,7 +110,7 @@ class SignUpVM: ObservableObject {
             phoneValidationResult = (false , "Required field")
         } else {
             
-            phoneValidationResult = ((phone.hasPrefix("+380") && phone.count == 13) , "Wrong number")
+            phoneValidationResult = ((phone.hasPrefix("+380") && phone.count == 13) , "Wrong number format")
         }
         
         updAllValid()
@@ -107,7 +119,7 @@ class SignUpVM: ObservableObject {
     func photoFieldValidation() {
         
         guard let photo = photo else {
-            photoValidationResult = (false , "Required field")
+            photoValidationResult = (false , "Photo is required")
             updAllValid()
             return
         }
@@ -117,23 +129,22 @@ class SignUpVM: ObservableObject {
         let imageSize = photo.size
         guard let imageData = photo.jpegData(compressionQuality: 1.0) else {
             photoValidationResult = (false , "Photo has to be jpeg/jpg type")
-            self.photo = nil
             updAllValid()
             return
         }
-        let fileSizeMB = imageData.count / (1024*1024)
+        let fileSizeMB: Double = Double(imageData.count) / (1024*1024)
         
         if imageSize.width < minResolution.width || imageSize.height < minResolution.height {
             photoValidationResult = (false , "70x70px minimal quality required")
-            self.photo = nil
             updAllValid()
             return
         }
         
-        if fileSizeMB > maxSizeMB {
+        
+        if fileSizeMB >= maxSizeMB {
             photoValidationResult = (false , "The photo's size has to be less then 5MB")
-            self.photo = nil
             updAllValid()
+        
             return
         }
         
@@ -160,23 +171,24 @@ class SignUpVM: ObservableObject {
             NWManager.shared.postUser(name: name, email: email, phone: phone, positionId: selectedPosition!.id, photoData: photo!.jpegData(compressionQuality: 1)!) { result in
                 switch result {
                 case .success(let success):
-                    self.alertView?.type.wrappedValue = .signUpSuccess
-                    self.alertView?.isPresented.wrappedValue?.wrappedValue = true
+                    self.alertView?.wrappedValue.type = .signUpSuccess
+                    self.alertView?.wrappedValue.supportingText = nil
+                    self.alertView?.wrappedValue.isPresented?.wrappedValue = true
+                    
                 case .failure(let error):
-
-                    
-                    
                     switch error {
                     case .errorResponce(let errorDesc):
-                        self.alertView = ModalAlertView(type: .signUpFail, supportingText: errorDesc.message, isPresented: <#T##Binding<Bool>?#>, complition: <#T##() -> Void#>)
-                        self.alertView?.supportingText.wrappedValue = string
+                        self.alertView?.wrappedValue.type = .signUpFail
+                        self.alertView?.wrappedValue.supportingText = errorDesc.fails?.first?.value.first
                     case .networkError:
-                        self.alertView?.type.wrappedValue = .noConnection
-                        self.alertView?
+                        self.alertView?.wrappedValue.type = .noConnection
+                        self.alertView?.wrappedValue.supportingText = nil
+                    default:
+                        self.alertView?.wrappedValue.type = .signUpFail
+                        self.alertView?.wrappedValue.supportingText = nil
                     }
-                    
-                    self.alertView?.isPresented.wrappedValue?.wrappedValue = true
                 }
+                self.alertView?.wrappedValue.isPresented?.wrappedValue = true
             }
         }
     }

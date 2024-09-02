@@ -60,7 +60,7 @@ struct SignupView: View {
                     CustomTextField(
                         subText: "Min 70x70px, less then 5 MB, jpeg/jpg type",
                         validationResult: $viewModel.photoValidationResult,
-                        placeholder: (viewModel.photoName.isEmpty ? "Upload your photo" : ""),
+                        placeholder: (viewModel.photoName.isEmpty ? "Upload your photo" : "Image"),
                         text: $viewModel.photoName
                     ).disabled(true)
                     

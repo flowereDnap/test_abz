@@ -26,11 +26,11 @@ enum TabType: String, CaseIterable{
 
 struct TabLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 8) {
             configuration.icon
                 .dynamicTypeSize(.xxxLarge)
             configuration.title
-                .font(.caption)
+                .font(UIConstraints.fontRegular(size: 16))
         }
     }
 }

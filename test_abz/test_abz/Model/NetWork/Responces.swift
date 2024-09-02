@@ -48,7 +48,8 @@ struct UsersResponse: Decodable {
 
 struct UserResponse: Decodable {
     let success: Bool
-    let user: User
+    let user_id: Int
+    let message: String
 }
 
 struct ErrorResponse: Decodable, Error {

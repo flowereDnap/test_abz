@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isFullScreenPresented = false
-    @State var alertView: ModalAlertView = ModalAlertView(type: .noConnection, supportingText: nil, isPresented: nil) {
+    @State var alertView: ModalAlertView = ModalAlertView( isPresented: nil) {
         
     }
     

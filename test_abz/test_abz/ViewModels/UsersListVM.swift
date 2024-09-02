@@ -17,7 +17,7 @@ class UsersListVM: ObservableObject {
      
     }
 
-    func fetchNextPage() {
+    func fetchNextPage( completion: @escaping () -> Void) {
         NWManager.shared.fetchUsers(page: currentPage + 1, itemsPerPage: itemsPerPage) { [weak self] result in
             guard let self = self else { return }
             
@@ -27,9 +27,12 @@ class UsersListVM: ObservableObject {
                 self.currentPage += 1
                 
             case .failure(_):
-                alertType?.wrappedValue = .noConnection
-                isPresented?.wrappedValue = true
+             
+                alertView?.wrappedValue.type = .noConnection
+                alertView?.wrappedValue.supportingText = nil
+                alertView?.wrappedValue.isPresented?.wrappedValue = true
             }
+            completion()
         }
     }
     
