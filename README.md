@@ -11,27 +11,37 @@
 
 ---
 
+Here is the corrected version with **MVVM Architecture used** as a title, not a list element:
+
+---
+
 ## Project Overview
-MVVM arcitecture used. 
-**Model**:  
-      -**Network Manager classes**: 
-          NWManager - responsible for get/post requests (singleton)
-          Errors/Responces - expected errors and responces from api
-      -**Local Memory**:
-          CacheImageManager - expected to store images of 12 latrest user to display it offline, but I didnt finish this logic implementation
-          KeychainHelper  - used to store sensetive data (at the moment - token needed for post requests)
-      -**Entities**: 
-          User - main object in the app
-**View Models**:
-      -**UsersList** - used to represent list of users fetched by NWManager, keeps track of loaded users
-      -**SignUp** - form to create new user, handles all business logic
-      -**Alert** - handles state of an allert (type, message, if is shown)
-**Views**:
-      -**ContentView** - shows users list or sign up form based on users choice, has Alert View overlayed
-      -**users list**
-      -**users list cell**
-      -**sign up**
-      -**users list**
+
+**MVVM Architecture used**
+
+- **Model**:  
+  - **Network Manager classes**:  
+    - `NWManager`: Responsible for GET/POST requests (singleton)  
+    - `Errors/Responses`: Handles expected errors and responses from the API  
+  - **Local Memory**:  
+    - `CacheImageManager`: Expected to store images of the 12 latest users to display offline, but this logic is not yet implemented  
+    - `KeychainHelper`: Used to store sensitive data (currently the token needed for POST requests)  
+  - **Entities**:  
+    - `User`: The main object in the app  
+
+- **View Models**:  
+  - `UsersList`: Represents a list of users fetched by `NWManager`, keeps track of loaded users  
+  - `SignUp`: Form to create a new user, handles all business logic  
+  - `Alert`: Manages the state of an alert (type, message, visibility)  
+
+- **Views**:  
+  - `ContentView`: Displays the users list or sign-up form based on user choice, with an alert view overlayed  
+  - `Users List`  
+  - `Users List Cell`  
+  - `Sign Up`  
+  - `Alert`
+ 
+---
 
 ## Configuration
 There are no specific configuration options or customizations required for this project.
