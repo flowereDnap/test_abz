@@ -73,4 +73,3 @@ There are currently no known issues. If you encounter any problems, feel free to
 
 ---
 
-This should paste nicely into your GitHub README with proper formatting.
