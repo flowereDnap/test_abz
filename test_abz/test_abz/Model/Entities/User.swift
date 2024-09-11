@@ -55,3 +55,8 @@ struct User: Decodable, Identifiable {
 
 }
 
+
+struct Position: Codable, RadioButtonItem {
+    var id: Int
+    var name: String
+}

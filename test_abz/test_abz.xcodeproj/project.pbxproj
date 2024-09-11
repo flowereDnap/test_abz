@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0407C54C2C865F060092F21F /* AlertVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407C54B2C865F060092F21F /* AlertVM.swift */; };
 		042CBF4D2C7C525E0008E226 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF4C2C7C525E0008E226 /* LabelStyle.swift */; };
 		042CBF512C81A2EA0008E226 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF502C81A2E80008E226 /* CustomTabView.swift */; };
 		042CBF532C832BDE0008E226 /* CameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF522C832BDD0008E226 /* CameraPicker.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0407C54B2C865F060092F21F /* AlertVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVM.swift; sourceTree = "<group>"; };
 		042CBF4C2C7C525E0008E226 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		042CBF502C81A2E80008E226 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		042CBF522C832BDD0008E226 /* CameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPicker.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				04707FDC2C7B639C005080DE /* signUpVM.swift */,
 				04707FD82C7B6355005080DE /* UsersListVM.swift */,
+				0407C54B2C865F060092F21F /* AlertVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				046264E32C74487B0057CEED /* SecondaryButton.swift in Sources */,
 				0474F4DC2C73E46000790B5C /* ContentView.swift in Sources */,
 				04A0D21E2C788F7000F01C63 /* RadioButtonGroup.swift in Sources */,
+				0407C54C2C865F060092F21F /* AlertVM.swift in Sources */,
 				046264E12C74486B0057CEED /* PrimaryButton.swift in Sources */,
 				0474F4EB2C73E73800790B5C /* User.swift in Sources */,
 				0474F4DA2C73E46000790B5C /* test_abzApp.swift in Sources */,

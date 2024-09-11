@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isFullScreenPresented = false
-    @State var alertView: ModalAlertView = ModalAlertView( isPresented: nil) {
-        
-    }
+    
+    @StateObject var alertVM: AlertVM
     
     @State var selectedTab = TabType.Users
     
@@ -45,24 +43,34 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
                     CustomTabBar(selection: $selectedTab)
-                    .fullScreenCover(isPresented: $isFullScreenPresented) {
-                        alertView
+                        .fullScreenCover(isPresented: $alertVM.isPresented) {
+                        ModalAlertView(viewModel: alertVM)
                     }
                     
                 }
                 
             }
             .padding(.top, proxy.safeAreaInsets.top > 0 ? 0.2 : 0)
-            .onAppear(){
-                alertView.isPresented = $isFullScreenPresented
-                usersListVM.alertView = $alertView
-                signUpVM.alertView = $alertView
-            }
         }
     }
     
 }
 
-#Preview {
-    ContentView(usersListVM: UsersListVM(), signUpVM: SignUpVM())
+
+struct ContentView_P: PreviewProvider {
+    struct Wrapper: View {
+        @State private var isPresented: UIImage? = UIImage(named: "photo-cover")
+        @StateObject var vm = AlertVM()
+        
+        var body: some View {
+            
+            ContentView(alertVM: vm, usersListVM: UsersListVM(alertVM: vm), signUpVM: SignUpVM(alertVM: vm))
+            
+        }
+    }
+    
+    static var previews: some View {
+        Wrapper()
+    }
 }
+

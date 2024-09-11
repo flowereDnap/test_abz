@@ -55,17 +55,12 @@ class SignUpVM: ObservableObject {
     private let minResolution: CGSize = CGSize(width: 70, height: 70)
     private let maxSizeMB = 5.0
     
-    var alertView: Binding<ModalAlertView>?
-   
-   init(alertView: Binding<ModalAlertView>) {
-       self.alertView = alertView
-       fetchPositions()
-   }
+    @ObservedObject var alertVM: AlertVM
     
-    init() {
+    init(alertVM: AlertVM) {
+        self.alertVM = alertVM
         fetchPositions()
     }
-    
     
     
     func nameFieldValidation() {
@@ -165,31 +160,33 @@ class SignUpVM: ObservableObject {
         }
     }
     
-    func signUp() {
+    func signUp(completion: @escaping () -> Void) {
         updAllValid()
         if allValid {
             NWManager.shared.postUser(name: name, email: email, phone: phone, positionId: selectedPosition!.id, photoData: photo!.jpegData(compressionQuality: 1)!) { result in
                 switch result {
                 case .success(let success):
-                    self.alertView?.wrappedValue.type = .signUpSuccess
-                    self.alertView?.wrappedValue.supportingText = nil
-                    self.alertView?.wrappedValue.isPresented?.wrappedValue = true
+                    self.alertVM.type = .signUpSuccess
+                    self.alertVM.supportingText = nil
+                    self.alertVM.isPresented = true
                     
                 case .failure(let error):
                     switch error {
                     case .errorResponce(let errorDesc):
-                        self.alertView?.wrappedValue.type = .signUpFail
-                        self.alertView?.wrappedValue.supportingText = errorDesc.fails?.first?.value.first
+                        self.alertVM.type = .signUpFail
+                        self.alertVM.supportingText = errorDesc.fails?.first?.value.first
                     case .networkError:
-                        self.alertView?.wrappedValue.type = .noConnection
-                        self.alertView?.wrappedValue.supportingText = nil
+                        self.alertVM.type = .noConnection
+                        self.alertVM.supportingText = nil
                     default:
-                        self.alertView?.wrappedValue.type = .signUpFail
-                        self.alertView?.wrappedValue.supportingText = nil
+                        self.alertVM.type = .signUpFail
+                        self.alertVM.supportingText = nil
                     }
                 }
-                self.alertView?.wrappedValue.isPresented?.wrappedValue = true
+                completion()
+                self.alertVM.isPresented = true
             }
+            
         }
     }
 }

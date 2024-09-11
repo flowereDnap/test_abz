@@ -22,90 +22,102 @@ struct SignupView: View {
     
     @State var imageName: String = ""
     
+    @State var loading = false
     
     var body: some View {
-        
-        ScrollView(showsIndicators: false){
-            VStack( spacing: 24){
-                VStack(spacing: 32) {
-                    CustomTextField(
-                        validationResult: $viewModel.nameValidationResult,
-                        placeholder:  "Your name",
-                        text: $viewModel.name
-                    )
-                    CustomTextField(
-                        validationResult: $viewModel.emailValidationResult,
-                        placeholder:  "Email",
-                        text: $viewModel.email
-                    )
-                    CustomTextField(
-                        subText: "+38 (XXX) XXX - XX - XX",
-                        validationResult: $viewModel.phoneValidationResult,
-                        placeholder:  "Phone",
-                        text: $viewModel.phone
-                    )
-                }
-                
-                Text("Select your position")
-                    .font(UIConstraints.fontRegular(size: 18))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                
+        ZStack{
+            ScrollView(showsIndicators: false){
+                VStack( spacing: 24){
+                    VStack(spacing: 32) {
+                        CustomTextField(
+                            validationResult: $viewModel.nameValidationResult,
+                            placeholder:  "Your name",
+                            text: $viewModel.name
+                        )
+                        CustomTextField(
+                            validationResult: $viewModel.emailValidationResult,
+                            placeholder:  "Email",
+                            text: $viewModel.email
+                        )
+                        CustomTextField(
+                            subText: "+38 (XXX) XXX - XX - XX",
+                            validationResult: $viewModel.phoneValidationResult,
+                            placeholder:  "Phone",
+                            text: $viewModel.phone
+                        )
+                    }
+                    
+                    Text("Select your position")
+                        .font(UIConstraints.fontRegular(size: 18))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
                     RadioButtonGroup<Position>(items: $viewModel.positions) { selected in
                         viewModel.selectedPosition = viewModel.positions.first { $0.name == selected }
                     }
-                
-                
-                ZStack(alignment: .topTrailing) {
-                    CustomTextField(
-                        subText: "Min 70x70px, less then 5 MB, jpeg/jpg type",
-                        validationResult: $viewModel.photoValidationResult,
-                        placeholder: (viewModel.photoName.isEmpty ? "Upload your photo" : "Image"),
-                        text: $viewModel.photoName
-                    ).disabled(true)
+                    
+                    
+                    ZStack(alignment: .topTrailing) {
+                        CustomTextField(
+                            subText: "Min 70x70px, less then 5 MB, jpeg/jpg type",
+                            validationResult: $viewModel.photoValidationResult,
+                            placeholder: (viewModel.photoName.isEmpty ? "Upload your photo" : "Image"),
+                            text: $viewModel.photoName
+                        ).disabled(true)
+                        
+                        Button {
+                            showImagePicker = true
+                        } label: {
+                            Text("Upload")
+                                .padding(.top, 5)
+                        }
+                        .buttonStyle(SecondaryButtonStyle())
+                        .buttonStyle(PrimaryButtonStyle())
+                        .confirmationDialog("Choose how you want to add a photo", isPresented: $showImagePicker) {
+                            
+                            Button("Camera") {
+                                showCamera = true
+                            }
+                            .disabled(!UIImagePickerController.isSourceTypeAvailable(.camera))
+                            
+                            Button("Gallery") {
+                                showGallery = true
+                            }
+                        } message: {
+                            Text("Choose how you want to add a photo")
+                        }
+                        .sheet(isPresented: $showCamera) {
+                            CameraPicker(selectedImage: $viewModel.photo, name: $viewModel.photoName)
+                        }
+                        .sheet(isPresented: $showGallery) {
+                            PhotoPicker(selection: $viewModel.photo, name: $viewModel.photoName)
+                        }
+                    }
                     
                     Button {
-                        showImagePicker = true
+                        loading = true
+                        viewModel.signUp(){
+                            loading = false
+                        }
                     } label: {
-                        Text("Upload")
-                            .padding(.top, 5)
+                        Text("Sign up")
                     }
-                    .buttonStyle(SecondaryButtonStyle())
                     .buttonStyle(PrimaryButtonStyle())
-                    .confirmationDialog("Choose how you want to add a photo", isPresented: $showImagePicker) {
-                        
-                        Button("Camera") {
-                            showCamera = true
-                        }
-                        .disabled(!UIImagePickerController.isSourceTypeAvailable(.camera))
-                        
-                        Button("Gallery") {
-                            showGallery = true
-                        }
-                    } message: {
-                        Text("Choose how you want to add a photo")
-                    }
-                    .sheet(isPresented: $showCamera) {
-                        CameraPicker(selectedImage: $viewModel.photo, name: $viewModel.photoName)
-                    }
-                    .sheet(isPresented: $showGallery) {
-                        PhotoPicker(selection: $viewModel.photo, name: $viewModel.photoName)
-                    }
+                    .disabled(!viewModel.allValid || loading)
+                    Spacer()
                 }
-                
-                Button {
-                    viewModel.signUp()
-                } label: {
-                    Text("Sign up")
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                .disabled(!viewModel.allValid)
-                Spacer()
+                .padding(.vertical, 32)
+                .padding(.horizontal, 16)
             }
-            .padding(.vertical, 32)
-            .padding(.horizontal, 16)
+            
+
+                ProgressView() // Default loader spinner
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(2)
+                    .opacity(loading ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: loading)
+
         }
-        
         
     }
     
@@ -118,11 +130,11 @@ struct SignupView: View {
 struct ContentView_Previews4: PreviewProvider {
     struct Wrapper: View {
         @State private var isPresented: UIImage? = UIImage(named: "photo-cover")
-        @StateObject var vm = SignUpVM()
+        @StateObject var vm = AlertVM()
         
         var body: some View {
             
-            SignupView(viewModel: vm)
+            SignupView(viewModel: SignUpVM(alertVM: vm))
             
         }
     }

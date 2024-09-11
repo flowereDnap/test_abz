@@ -16,16 +16,11 @@ enum AlertType {
 
 struct ModalAlertView: View {
     
-    var type: AlertType = .noConnection
+    @StateObject var viewModel: AlertVM
     
-    var isPresented: Binding<Bool>?
-    
-    
-    
-    var supportingText: String? = nil
     
     var imageName: String {
-        switch type {
+        switch viewModel.type {
         case .noConnection:
             return "no-connection-image"
         case .signUpSuccess:
@@ -36,7 +31,7 @@ struct ModalAlertView: View {
     }
     
     var buttonText: String {
-        switch type {
+        switch viewModel.type {
         case .noConnection:
             return "Try again"
         case .signUpSuccess:
@@ -46,13 +41,11 @@ struct ModalAlertView: View {
         }
     }
     
-    var completion: ()->Void
-    
     var displayText: String {
-        if let supportingText = supportingText {
+        if let supportingText = viewModel.supportingText {
             return supportingText
         } else {
-            switch type {
+            switch viewModel.type {
             case .noConnection:
                 return "There is no internet Connection"
             case .signUpSuccess:
@@ -63,18 +56,12 @@ struct ModalAlertView: View {
         }
     }
     
-    init(isPresented: Binding<Bool>?, complition: @escaping ()->Void) {
-        
-        self.isPresented = isPresented
-        self.completion = complition
-    }
-    
     var body: some View {
         ZStack(alignment: .topTrailing){
             HStack {
                 Spacer()
                 Button(action: {
-                    isPresented?.wrappedValue = false
+                    viewModel.isPresented = false
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(.black)
@@ -90,8 +77,8 @@ struct ModalAlertView: View {
                 Text(displayText)
                     .font(UIConstraints.fontRegular(size: 20))
                 Button {
-                    isPresented?.wrappedValue = false
-                    completion()
+                    viewModel.isPresented = false
+                    viewModel.complition()
                 } label: {
                     Text(buttonText)
                         
@@ -110,11 +97,10 @@ struct ModalAlertView: View {
 
 struct InputTextField_Previews2: PreviewProvider {
     struct Wrapper: View {
-        @State var bool = true
+        @StateObject var vm = AlertVM()
         
         var body: some View {
-            ModalAlertView(isPresented: $bool) {
-            }
+            ModalAlertView(viewModel: vm)
         }
     }
     

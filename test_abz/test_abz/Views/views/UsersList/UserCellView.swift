@@ -59,7 +59,7 @@ struct UserCellView: View {
 struct ContentView_PreviewsUserList: PreviewProvider {
     struct Wrapper: View {
         @State private var isPresented: UIImage = UIImage(named: "photo-cover")!
-      
+        @StateObject var vm = AlertVM()
 
         var body: some View {
             
@@ -78,6 +78,6 @@ struct ContentView_PreviewsUserList: PreviewProvider {
     }
 
     static var previews: some View {
-        Wrapper().environmentObject(UsersListVM())
+        Wrapper()
     }
 }

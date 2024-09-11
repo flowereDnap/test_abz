@@ -7,18 +7,15 @@ class UsersListVM: ObservableObject {
     private let itemsPerPage: Int = 6
     private let cacheManager = CacheImageManager()
 
-     var alertView: Binding<ModalAlertView>?
+    @ObservedObject var alertVM: AlertVM
     
-    init(alertView: Binding<ModalAlertView>) {
-        self.alertView = alertView
+    init(alertVM: AlertVM) {
+        self.alertVM = alertVM
     }
     
-    init() {
-     
-    }
 
     func fetchNextPage( completion: @escaping () -> Void) {
-        NWManager.shared.fetchUsers(page: currentPage + 1, itemsPerPage: itemsPerPage) { [weak self] result in
+        NWManager.shared.fetchUsers(page: currentPage, itemsPerPage: itemsPerPage) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -28,9 +25,9 @@ class UsersListVM: ObservableObject {
                 
             case .failure(_):
              
-                alertView?.wrappedValue.type = .noConnection
-                alertView?.wrappedValue.supportingText = nil
-                alertView?.wrappedValue.isPresented?.wrappedValue = true
+                alertVM.type = .noConnection
+                alertVM.supportingText = nil
+                alertVM.isPresented = true
             }
             completion()
         }

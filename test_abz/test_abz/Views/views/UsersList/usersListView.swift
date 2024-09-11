@@ -35,7 +35,6 @@ struct UsersView: View {
                         viewModel.fetchNextPage() {
                             loading = false
                             lastId = viewModel.users.last?.id ?? -1
-                            
                         }
                         loading = true
                     } label: {
@@ -58,12 +57,11 @@ struct UsersView: View {
                                         .onChange(of: geometry.frame(in: .global).maxY) { maxY in
                                             let screenHeight = UIScreen.main.bounds.height
                                             if maxY < screenHeight {
-                                                if !didScrollAll && !loading{
-                                                    
+                                                if !didScrollAll {
                                                     didScrollAll = true
                                                 }
                                             } else {
-                                                if didScrollAll && !loading {
+                                                if didScrollAll {
                                                     
                                                     didScrollAll = false
                                                 }
@@ -86,31 +84,39 @@ struct UsersView: View {
             .frame(minHeight: 0,
                    maxHeight: .infinity)
             .gesture(negativeDrug)
-            .animation(.default)
             
-            if loading {
                 ProgressView() // Default loader spinner
                     .progressViewStyle(CircularProgressViewStyle())
                     .scaleEffect(2)
-            }
+                    .opacity(loading ? 1 : 0)
+                    .animation(.easeOut(duration: 1), value: loading)
         }
-        
+        .padding(0)
     }
     
     
     func drug(){
-        viewModel.fetchNextPage(){
-            loading = false
-            lastId = viewModel.users.last?.id ?? -1
-        }
-        loading = true
+        DispatchQueue.main.async {
+                loading = true
+            }
+        
+                DispatchQueue.global(qos: .background).async {
+                    viewModel.fetchNextPage() {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            loading = false
+                            lastId = viewModel.users.last?.id ?? -1
+                        }
+                    }
+                }
     }
     
     var negativeDrug: some Gesture {
         DragGesture()
             .updating($dragOffset) { value, state, transaction in
                 state = value.translation
-                if state.height < -15 && didScrollAll {
+                print(state.height, didScrollAll)
+                if state.height < -10 && didScrollAll {
+                    loading = true
                     drug()
                     }
             }
@@ -122,21 +128,15 @@ struct UsersView: View {
 
 struct UsersView_Previews: PreviewProvider {
     struct Wrapper: View {
-        @State private var isPresented: Bool = false
-        @State private var allertType: AlertType = .noConnection
-        @State var alert: ModalAlertView = ModalAlertView( isPresented: nil) {
-            
-        }
+        
+        @StateObject var vm = AlertVM()
         
         var body: some View {
-            UsersView(viewModel: UsersListVM())
-                .onAppear(){
-                    alert.isPresented = $isPresented
-                }
+            UsersView(viewModel: UsersListVM(alertVM: vm)).environmentObject(UsersListVM(alertVM: vm))
         }
     }
     
     static var previews: some View {
-        Wrapper().environmentObject(UsersListVM())
+        Wrapper()
     }
 }

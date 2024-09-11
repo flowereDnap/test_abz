@@ -21,10 +21,6 @@ struct PositionsResponse: Codable {
     let positions: [Position]
 }
 
-struct Position: Codable, RadioButtonItem {
-    var id: Int
-    var name: String
-}
 
 struct UsersResponse: Decodable {
     let success: Bool
