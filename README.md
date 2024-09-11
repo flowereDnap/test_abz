@@ -11,10 +11,6 @@
 
 ---
 
-Here is the corrected version with **MVVM Architecture used** as a title, not a list element:
-
----
-
 ## Project Overview
 
 **MVVM Architecture used**
