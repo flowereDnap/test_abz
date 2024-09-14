@@ -23,7 +23,8 @@
     - `CacheImageManager`: Expected to store images of the 12 latest users to display offline, but this logic is not yet implemented  
     - `KeychainHelper`: Used to store sensitive data (currently the token needed for POST requests)  
   - **Entities**:  
-    - `User`: The main object in the app  
+    - `User`: The main object in the app
+    - `Model`: Manages data storage and access across the app in its lifespan
 
 - **View Models**:  
   - `UsersList`: Represents a list of users fetched by `NWManager`, keeps track of loaded users  
@@ -31,7 +32,7 @@
   - `Alert`: Manages the state of an alert (type, message, visibility)  
 
 - **Views**:  
-  - `ContentView`: Displays the users list or sign-up form based on user choice, with an alert view overlayed  
+  - `ContentView`: Displays the list of users or sign-up form based on user's choice, with an alert view overlayed  
   - `Users List`  
   - `Users List Cell`  
   - `Sign Up`  
@@ -69,7 +70,9 @@ Additional components include:
 - **Data Caching**: Implemented to store images for offline access.
 
 ## Troubleshooting
-There are currently no known issues. If you encounter any problems, feel free to submit an issue on the repository.
+- Well not enough comments in some parts will do later on maybe
+- Issue with image uploading to signup form (probably view does not get updated, anyway why do we use text field for this one? maybe change design)
+- When a new user is posted it is not immediately added to the list of users in the app and not seen in the list of users (I do request to the server to get my new user back, but probably server does not handle new user creation so fast and I don't get any response. Maybe if I get success just add pseudo user for visibility in list?)
 
 ---
 
