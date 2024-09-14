@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 
 class SignUpVM: ObservableObject {
+    
+    
     @Published var name: String = "" {
         didSet {
             nameFieldValidation()
@@ -39,7 +41,7 @@ class SignUpVM: ObservableObject {
         allValid = (nameValidationResult.0 && emailValidationResult.0 && phoneValidationResult.0 && photoValidationResult.0 && selectedPosition != nil)
     }
     
-    @Published var positions: [Position] = []
+    
     
     @Published var selectedPosition: Position? = nil {
         didSet {
@@ -56,10 +58,11 @@ class SignUpVM: ObservableObject {
     private let maxSizeMB = 5.0
     
     @ObservedObject var alertVM: AlertVM
+    @ObservedObject var model: Model
     
-    init(alertVM: AlertVM) {
+    init(alertVM: AlertVM, model: Model) {
         self.alertVM = alertVM
-        fetchPositions()
+        self.model = model
     }
     
     
@@ -146,35 +149,22 @@ class SignUpVM: ObservableObject {
         photoValidationResult = (true , " ")
         updAllValid()
     }
-    
-    func fetchPositions() {
-        NWManager.shared.fetchPositions { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let fetchedPositions):
-                positions = fetchedPositions
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+   
     
     func signUp(completion: @escaping () -> Void) {
         updAllValid()
         if allValid {
-            NWManager.shared.postUser(name: name, email: email, phone: phone, positionId: selectedPosition!.id, photoData: photo!.jpegData(compressionQuality: 1)!) { result in
+            model.postUser(name: name, email: email, phone: phone, positionId: selectedPosition!.id, photoData: photo!.jpegData(compressionQuality: 1)!) { result in
                 switch result {
                 case .success(let success):
                     self.alertVM.type = .signUpSuccess
                     self.alertVM.supportingText = nil
                     self.alertVM.isPresented = true
-                    
                 case .failure(let error):
                     switch error {
                     case .errorResponce(let errorDesc):
                         self.alertVM.type = .signUpFail
-                        self.alertVM.supportingText = errorDesc.fails?.first?.value.first
+                        self.alertVM.supportingText = errorDesc.fails?.first?.value.first ?? errorDesc.message
                     case .networkError:
                         self.alertVM.type = .noConnection
                         self.alertVM.supportingText = nil
@@ -186,7 +176,6 @@ class SignUpVM: ObservableObject {
                 completion()
                 self.alertVM.isPresented = true
             }
-            
         }
     }
 }

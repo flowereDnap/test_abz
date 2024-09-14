@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct test_abzApp: App {
     @StateObject var alerVM = AlertVM()
-    
+    @StateObject var model = Model()
     var body: some Scene {
         WindowGroup {
             
-            ContentView(alertVM: alerVM, usersListVM: UsersListVM(alertVM: alerVM), signUpVM: SignUpVM(alertVM: alerVM))
+            ContentView(alertVM: alerVM, usersListVM: UsersListVM(alertVM: alerVM, model: model), signUpVM: SignUpVM(alertVM: alerVM, model: model))
         }
     }
 }

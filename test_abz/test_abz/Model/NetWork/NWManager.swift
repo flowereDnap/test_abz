@@ -101,7 +101,7 @@ class NWManager {
         }
     }
     
-    func fetchUser(id: Int, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+    func fetchUser(id: Int, completion: @escaping (Result<GetUserResponse, Error>) -> Void) {
         let url = baseURL + "/user/\(id)"
         
         AF.request(url, method: .get).response { response in
@@ -119,7 +119,7 @@ class NWManager {
                     }
                     
                     if sussess {
-                        let userResponce = try JSONDecoder().decode(UserResponse.self, from: data)
+                        let userResponce = try JSONDecoder().decode(GetUserResponse.self, from: data)
                         completion(.success(userResponce))
                     } else {
                         let errorResponce = try JSONDecoder().decode(ErrorResponse.self, from: data)
@@ -211,7 +211,7 @@ class NWManager {
                   phone:String,
                   positionId: Int,
                   photoData: Data,
-                  completion: @escaping (Result<Bool, NWManagerError>) -> Void) {
+                  completion: @escaping (Result<Int, NWManagerError>) -> Void) {
         let url = baseURL + "/users"
         
         let headers: HTTPHeaders = [
@@ -251,8 +251,8 @@ class NWManager {
                     }
                     
                     if sussess {
-                        let usersResponce = try JSONDecoder().decode(UserResponse.self, from: data)
-                        completion(.success(true))
+                        let userResponce = try JSONDecoder().decode(PostUserResponse.self, from: data)
+                        completion(.success(userResponce.user_id))
                     } else {
                         let errorResponce = try JSONDecoder().decode(ErrorResponse.self, from: data)
                         completion(.failure(NWManagerError.errorResponce(errorResponce)))

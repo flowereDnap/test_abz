@@ -24,7 +24,7 @@ struct UserCellView: View {
                     .clipShape(Circle())
                     .padding(.trailing, 16)
                     .onAppear {
-                                        viewModel.fetchUserImage(for: user, bindingImage: $image)
+                        viewModel.fetchUserImage(for: user, bindingImage: $image)
                                     }
             VStack(alignment: .leading, spacing: 0){
                 Text(user.name)

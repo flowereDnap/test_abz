@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0407C54C2C865F060092F21F /* AlertVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407C54B2C865F060092F21F /* AlertVM.swift */; };
+		0407C5502C92FE770092F21F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407C54F2C92FE770092F21F /* Model.swift */; };
 		042CBF4D2C7C525E0008E226 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF4C2C7C525E0008E226 /* LabelStyle.swift */; };
 		042CBF512C81A2EA0008E226 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF502C81A2E80008E226 /* CustomTabView.swift */; };
 		042CBF532C832BDE0008E226 /* CameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CBF522C832BDD0008E226 /* CameraPicker.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		0407C54B2C865F060092F21F /* AlertVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVM.swift; sourceTree = "<group>"; };
+		0407C54F2C92FE770092F21F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		042CBF4C2C7C525E0008E226 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		042CBF502C81A2E80008E226 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		042CBF522C832BDD0008E226 /* CameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPicker.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				0474F4EA2C73E73800790B5C /* User.swift */,
+				0407C54F2C92FE770092F21F /* Model.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				042CBF512C81A2EA0008E226 /* CustomTabView.swift in Sources */,
 				04707FDD2C7B639C005080DE /* signUpVM.swift in Sources */,
 				046264E52C7450E30057CEED /* TextField.swift in Sources */,
+				0407C5502C92FE770092F21F /* Model.swift in Sources */,
 				04A0D21A2C76075F00F01C63 /* ModalAlertView.swift in Sources */,
 				0474F4F82C73F9C700790B5C /* KeychainHelper.swift in Sources */,
 				0474F4F52C73F3EE00790B5C /* Responces.swift in Sources */,

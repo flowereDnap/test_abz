@@ -42,10 +42,15 @@ struct UsersResponse: Decodable {
     }
 }
 
-struct UserResponse: Decodable {
+struct PostUserResponse: Decodable {
     let success: Bool
     let user_id: Int
     let message: String
+}
+
+struct GetUserResponse: Decodable {
+    let success: Bool
+    let user: User
 }
 
 struct ErrorResponse: Decodable, Error {

@@ -12,7 +12,7 @@ import PhotosUI
 struct SignupView: View {
     
     @StateObject var viewModel: SignUpVM
-
+    
     
     @State private var showImagePicker: Bool = false
     @State private var showCamera = false
@@ -21,8 +21,6 @@ struct SignupView: View {
     @State private var validationError: String? = nil
     
     @State var imageName: String = ""
-    
-    @State var loading = false
     
     var body: some View {
         ZStack{
@@ -52,8 +50,8 @@ struct SignupView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     
-                    RadioButtonGroup<Position>(items: $viewModel.positions) { selected in
-                        viewModel.selectedPosition = viewModel.positions.first { $0.name == selected }
+                    RadioButtonGroup<Position>(items: $viewModel.model.positions) { selected in
+                        viewModel.selectedPosition = viewModel.model.positions.first { $0.name == selected }
                     }
                     
                     
@@ -95,15 +93,15 @@ struct SignupView: View {
                     }
                     
                     Button {
-                        loading = true
+                        
                         viewModel.signUp(){
-                            loading = false
+                            
                         }
                     } label: {
                         Text("Sign up")
                     }
                     .buttonStyle(PrimaryButtonStyle())
-                    .disabled(!viewModel.allValid || loading)
+                    .disabled(!viewModel.allValid || viewModel.model.awaitingResponce)
                     Spacer()
                 }
                 .padding(.vertical, 32)
@@ -114,8 +112,8 @@ struct SignupView: View {
                 ProgressView() // Default loader spinner
                     .progressViewStyle(CircularProgressViewStyle())
                     .scaleEffect(2)
-                    .opacity(loading ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.5), value: loading)
+                    .opacity(viewModel.model.awaitingResponce ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: viewModel.model.awaitingResponce)
 
         }
         
@@ -134,7 +132,7 @@ struct ContentView_Previews4: PreviewProvider {
         
         var body: some View {
             
-            SignupView(viewModel: SignUpVM(alertVM: vm))
+            SignupView(viewModel: SignUpVM(alertVM: vm, model: Model()))
             
         }
     }

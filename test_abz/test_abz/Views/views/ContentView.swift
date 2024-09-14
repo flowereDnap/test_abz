@@ -61,10 +61,11 @@ struct ContentView_P: PreviewProvider {
     struct Wrapper: View {
         @State private var isPresented: UIImage? = UIImage(named: "photo-cover")
         @StateObject var vm = AlertVM()
+        @StateObject var model = Model()
         
         var body: some View {
             
-            ContentView(alertVM: vm, usersListVM: UsersListVM(alertVM: vm), signUpVM: SignUpVM(alertVM: vm))
+            ContentView(alertVM: vm, usersListVM: UsersListVM(alertVM: vm, model: model), signUpVM: SignUpVM(alertVM: vm, model: model))
             
         }
     }

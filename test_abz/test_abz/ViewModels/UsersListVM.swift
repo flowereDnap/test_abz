@@ -2,55 +2,38 @@ import Foundation
 import SwiftUI
 
 class UsersListVM: ObservableObject {
-    @Published var users: [User] = []
-    private var currentPage: Int = 1
-    private let itemsPerPage: Int = 6
-    private let cacheManager = CacheImageManager()
-
+    
+    private var model: Model
     @ObservedObject var alertVM: AlertVM
     
-    init(alertVM: AlertVM) {
+    @Published var users: [User] = []
+    @Published var loading: Bool = false
+    
+    init(alertVM: AlertVM, model: Model) {
         self.alertVM = alertVM
+        self.model = model
+        
+        self.users = model.users
+        model.$users.assign(to: &$users)
+        
+        self.loading = model.awaitingResponce
+        model.$awaitingResponce.assign(to: &$loading)
     }
     
-
-    func fetchNextPage( completion: @escaping () -> Void) {
-        NWManager.shared.fetchUsers(page: currentPage, itemsPerPage: itemsPerPage) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let fetchedUsers):
-                self.users.append(contentsOf: fetchedUsers)
-                self.currentPage += 1
+    func fetchNextPage(completion: @escaping () -> Void) {
+        model.fetchNextPage { success in
+            if success {
+                completion()
+            } else {
+                self.alertVM.type = .noConnection
+                self.alertVM.supportingText = nil
+                self.alertVM.isPresented = true
                 
-            case .failure(_):
-             
-                alertVM.type = .noConnection
-                alertVM.supportingText = nil
-                alertVM.isPresented = true
             }
-            completion()
         }
     }
     
     func fetchUserImage(for user: User, bindingImage: Binding<UIImage>) {
-        if let cachedImage = cacheManager.getImage(forKey: user.photo) {
-            bindingImage.wrappedValue = cachedImage
-            return
-        }
-        
-        // If not in cache, fetch from server
-        NWManager.shared.fetchImage(from: user.photo) { [weak self] result in
-            switch result {
-            case .success(let downloadedImage):
-                DispatchQueue.main.async {
-                    self?.cacheManager.cacheImage(downloadedImage, forKey: user.photo)
-                    bindingImage.wrappedValue = downloadedImage
-                }
-            case .failure(let error):
-                print(error)
-                break
-            }
-        }
+        model.fetchUserImage(for: user, bindingImage: bindingImage)
     }
 }
