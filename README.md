@@ -18,7 +18,7 @@
 - **Model**:  
   - **Network Manager classes**:  
     - `NWManager`: Responsible for GET/POST requests (singleton)  
-    - `Errors/Responses`: Handles expected errors and responses from the API  
+    - `Errors/Responses`: Entities of expected errors and responses from the API  
   - **Local Memory**:  
     - `CacheImageManager`: Expected to store images of the 12 latest users to display offline, but this logic is not yet implemented  
     - `KeychainHelper`: Used to store sensitive data (currently the token needed for POST requests)  
